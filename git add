@@ -1,3 +1,0 @@
-git add .
-git commit -m "Removendo senha exposta do código"
-git push origin main
