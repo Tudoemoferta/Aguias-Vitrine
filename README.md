@@ -36,7 +36,7 @@ O **Águias Vitrine** é um site profissional de afiliados desenvolvido especifi
 
 ### 🔐 Segurança Avançada
 - **Autenticação por Senha**: Acesso administrativo protegido
-- **Senha Segura**: `aguias2025` (recomenda-se alterar)
+- **Senha Segura**: `....` 
 - **Proteção contra Invasões**: Validações e controles de acesso
 - **Armazenamento Local Seguro**: Dados salvos com segurança no navegador
 
@@ -56,7 +56,7 @@ O **Águias Vitrine** é um site profissional de afiliados desenvolvido especifi
 
 ### Para Administradores
 1. **Acesso**: Clique em "Administração" no cabeçalho
-2. **Login**: Digite a senha `aguias2025`
+2. **Login**: Digite a senha `....`
 3. **Adicionar Produto**: Clique em "Adicionar Produto" e preencha os dados
 4. **Gerenciar**: Use os botões "Editar" e "Excluir" nos produtos
 5. **Backup**: Use "Exportar Produtos" para fazer backup dos dados
@@ -86,7 +86,7 @@ O **Águias Vitrine** é um site profissional de afiliados desenvolvido especifi
 ### Alterar Senha de Administrador
 Edite a linha no arquivo `index.html`:
 ```javascript
-const ADMIN_PASSWORD = 'aguias2025'; // Altere aqui
+const ADMIN_PASSWORD = '....'; // Altere aqui
 ```
 
 ### Personalizar Categorias
