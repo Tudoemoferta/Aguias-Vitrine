@@ -6,44 +6,16 @@
     
     <!-- SEO Meta Tags Otimizadas -->
     <title>🦅 Águias Vitrine - Ofertas e Produtos em Promoção | Tudo em Oferta com os Melhores Descontos</title>
-    <meta name="description" content="Encontre os melhores produtos em oferta na Águias Vitrine! Eletrônicos, moda, casa, beleza e muito mais com descontos imperdíveis. Ofertas relâmpago todos os dias com os melhores preços do mercado.">
-    <meta name="keywords" content="águias vitrine, ofertas, promoções, descontos, produtos baratos, ofertas relâmpago, tudo em oferta, eletrônicos em promoção, moda com desconto, casa e decoração oferta, beleza promoção, celular desconto, utilidades baratas, e-books promoção, compras online, economia, cupons desconto">
+    <meta name="description" content="Encontre os melhores produtos em oferta na Águias Vitrine! Eletrônicos, moda, casa, beleza e muito mais com descontos imperdíveis.">
+    <meta name="keywords" content="águias vitrine, ofertas, promoções, descontos, shopee, amazon, mercado livre">
     <meta name="author" content="Águias Vitrine - Tudo em Oferta">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="language" content="pt-BR">
-    <meta name="revisit-after" content="1 day">
-    <meta name="distribution" content="global">
-    <meta name="rating" content="general">
-    <meta name="geo.region" content="BR">
-    <meta name="geo.country" content="Brazil">
+    <meta name="robots" content="index, follow">
     
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="ktO2w5wC_X1YSXOI2-RdaXRPEbAeX_fLDHUs_x-b-YM" />
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aguiasvitrine.netlify.app/">
-    <meta property="og:title" content="🦅 Águias Vitrine - Ofertas e Produtos em Promoção">
-    <meta property="og:description" content="Encontre os melhores produtos em oferta! Eletrônicos, moda, casa, beleza e muito mais com descontos imperdíveis. Ofertas relâmpago todos os dias!">
-    <meta property="og:image" content="https://aguiasvitrine.netlify.app/eagle-logo.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Águias Vitrine">
-    <meta property="og:locale" content="pt_BR">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="og:url" content="https://aguiasvitrine.netlify.app/">
-    <meta property="og:title" content="🦅 Águias Vitrine - Ofertas e Produtos em Promoção">
-    <meta property="og:description" content="Encontre os melhores produtos em oferta! Eletrônicos, moda, casa, beleza e muito mais com descontos imperdíveis.">
-    <meta property="og:image" content="https://aguiasvitrine.netlify.app/eagle-logo.jpg">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://aguiasvitrine.netlify.app/">
-    
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="eagle-logo.jpg">
-    <link rel="apple-touch-icon" sizes="180x180" href="eagle-logo.jpg">
     
     <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -77,7 +49,6 @@
             background: url('eagle-background.jpg') center/cover no-repeat;
             opacity: 0.15;
             z-index: -1;
-            filter: brightness(1.2) contrast(1.1);
         }
 
         .container {
@@ -127,7 +98,6 @@
             background: linear-gradient(45deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .logo-text p {
@@ -153,10 +123,6 @@
             color: white;
         }
 
-        .connection-status.offline {
-            background: #f44336;
-        }
-
         .status-dot {
             width: 8px;
             height: 8px;
@@ -178,7 +144,6 @@
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1rem;
             transition: all 0.3s ease;
         }
 
@@ -190,7 +155,6 @@
         /* Contact Info */
         .contact-info {
             background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
             padding: 1rem;
             margin: 2rem 0;
             border-radius: 15px;
@@ -205,14 +169,49 @@
             margin: 0 10px;
         }
 
-        .contact-info a:hover {
-            text-decoration: underline;
+        /* Categories Filter */
+        .categories-filter {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-title {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
         }
 
         /* Search */
         .search-section {
             background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
             padding: 2rem;
             margin: 2rem 0;
             border-radius: 20px;
@@ -232,29 +231,11 @@
             border: 2px solid #e0e0e0;
             border-radius: 25px;
             font-size: 1rem;
-            transition: all 0.3s ease;
         }
 
         .search-input:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .search-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         /* Products */
@@ -282,7 +263,7 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
-            cursor: pointer;
+            position: relative;
         }
 
         .product-card:hover {
@@ -290,11 +271,37 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
+        .product-badges {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        .badge {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-platform {
+            background: rgba(102, 126, 234, 0.9);
+        }
+
+        .badge-category {
+            background: rgba(118, 75, 162, 0.9);
+        }
+
         .product-image {
             width: 100%;
             height: 280px;
             object-fit: cover;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .product-info {
@@ -325,40 +332,11 @@
             text-decoration: none;
             text-align: center;
             font-weight: bold;
-            font-size: 1.1rem;
             transition: all 0.3s ease;
         }
 
         .product-link:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Empty State */
-        .empty-state {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 4rem 2rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .empty-state i {
-            font-size: 5rem;
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .empty-state h2 {
-            color: #333;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .empty-state p {
-            color: #666;
-            font-size: 1.1rem;
         }
 
         /* Modal */
@@ -382,7 +360,6 @@
             padding: 40px;
             border-radius: 20px;
             position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
         .close-btn {
@@ -392,11 +369,6 @@
             font-size: 30px;
             cursor: pointer;
             color: #999;
-            transition: color 0.3s ease;
-        }
-
-        .close-btn:hover {
-            color: #333;
         }
 
         .modal-title {
@@ -418,20 +390,48 @@
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group select {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             font-size: 16px;
-            transition: all 0.3s ease;
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group select:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .image-upload-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .upload-btn {
+            flex: 1;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .upload-btn:hover {
+            background: #5568d3;
+        }
+
+        .image-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: none;
         }
 
         .btn-submit {
@@ -444,12 +444,6 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
         .admin-section {
@@ -457,41 +451,19 @@
             margin-top: 30px;
         }
 
-        /* Footer */
-        .footer {
+        .empty-state {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 2rem 0;
-            margin-top: 4rem;
-            text-align: center;
-            box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer p {
-            color: #666;
-            margin: 0.5rem 0;
-        }
-
-        /* Loading */
-        .loading {
-            text-align: center;
             padding: 4rem 2rem;
-            color: white;
-            font-size: 1.5rem;
+            border-radius: 20px;
+            text-align: center;
         }
 
-        .loading i {
-            font-size: 3rem;
+        .empty-state i {
+            font-size: 5rem;
+            color: #667eea;
             margin-bottom: 1rem;
-            animation: spin 1s linear infinite;
         }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .logo img {
                 width: 50px;
@@ -502,20 +474,16 @@
                 font-size: 1.4rem;
             }
 
-            .section-title {
-                font-size: 2rem;
-            }
-
             .products-grid {
                 grid-template-columns: 1fr;
             }
 
-            .search-container {
+            .filter-buttons {
                 flex-direction: column;
             }
 
-            .modal-content {
-                padding: 30px 20px;
+            .filter-btn {
+                width: 100%;
             }
         }
     </style>
@@ -526,7 +494,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="eagle-logo.jpg" alt="Águias Vitrine Logo">
+                    <img src="eagle-logo.jpg" alt="Águias Vitrine">
                     <div class="logo-text">
                         <h1>Águias Vitrine</h1>
                         <p>Tudo em Oferta</p>
@@ -538,7 +506,7 @@
                         <span>Sincronizado</span>
                     </div>
                     <button class="admin-btn" onclick="openAdminModal()">
-                        <i class="fas fa-lock"></i> Administração
+                        <i class="fas fa-lock"></i> Admin
                     </button>
                 </div>
             </div>
@@ -546,7 +514,7 @@
     </header>
 
     <div class="container">
-        <!-- Contact Info -->
+        <!-- Contact -->
         <div class="contact-info">
             <p>
                 <i class="fas fa-envelope"></i> 
@@ -557,13 +525,25 @@
             </p>
         </div>
 
+        <!-- Categories Filter -->
+        <div class="categories-filter">
+            <h3 class="filter-title"><i class="fas fa-filter"></i> Filtrar por Categoria</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterByCategory('todas')">Todas</button>
+                <button class="filter-btn" onclick="filterByCategory('livros')">📚 Livros</button>
+                <button class="filter-btn" onclick="filterByCategory('moda-feminina')">👗 Moda Feminina</button>
+                <button class="filter-btn" onclick="filterByCategory('moda-masculina')">👔 Moda Masculina</button>
+                <button class="filter-btn" onclick="filterByCategory('beleza')">💄 Beleza</button>
+                <button class="filter-btn" onclick="filterByCategory('eletronicos')">📱 Eletrônicos</button>
+                <button class="filter-btn" onclick="filterByCategory('casa')">🏠 Casa</button>
+                <button class="filter-btn" onclick="filterByCategory('outros')">📦 Outros</button>
+            </div>
+        </div>
+
         <!-- Search -->
         <div class="search-section">
             <div class="search-container">
                 <input type="text" class="search-input" id="searchInput" placeholder="🔍 Buscar produtos..." onkeyup="filterProducts()">
-                <button class="search-btn" onclick="filterProducts()">
-                    <i class="fas fa-search"></i> Buscar
-                </button>
             </div>
         </div>
 
@@ -571,29 +551,19 @@
         <section class="products-section">
             <h2 class="section-title">🔥 Ofertas Imperdíveis</h2>
             <div id="productsContainer" class="loading">
-                <i class="fas fa-spinner"></i>
                 <p>Carregando produtos...</p>
             </div>
         </section>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p><strong>🦅 Águias Vitrine - Tudo em Oferta</strong></p>
-            <p>Os melhores produtos com os melhores preços!</p>
-            <p>&copy; 2025 Águias Vitrine. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- Modal de Administração -->
+    <!-- Modal Admin -->
     <div id="adminModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeAdminModal()">&times;</span>
-            <h2 class="modal-title"><i class="fas fa-lock"></i> Painel de Administração</h2>
+            <h2 class="modal-title"><i class="fas fa-lock"></i> Administração</h2>
             
             <div class="form-group">
-                <label>Senha de Administrador:</label>
+                <label>Senha:</label>
                 <input type="password" id="adminPassword" placeholder="Digite a senha">
             </div>
 
@@ -603,7 +573,7 @@
 
             <div id="adminForm" class="admin-section">
                 <h3 style="color: #667eea; margin: 30px 0 20px;">
-                    <i class="fas fa-plus-circle"></i> Adicionar Novo Produto
+                    <i class="fas fa-plus-circle"></i> Adicionar Produto
                 </h3>
                 
                 <div class="form-group">
@@ -617,13 +587,49 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Link do Produto:</label>
-                    <input type="url" id="productLink" placeholder="Cole o link de afiliado aqui">
+                    <label>Plataforma:</label>
+                    <select id="productPlatform">
+                        <option value="Shopee">🛍️ Shopee</option>
+                        <option value="Amazon">📦 Amazon</option>
+                        <option value="Mercado Livre">🛒 Mercado Livre</option>
+                        <option value="AliExpress">🌏 AliExpress</option>
+                        <option value="Hotmart">🎓 Hotmart</option>
+                        <option value="Kwai">📱 Kwai</option>
+                        <option value="Outro">📍 Outro</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label>URL da Imagem:</label>
-                    <input type="url" id="productImage" placeholder="Cole a URL da imagem do produto">
+                    <label>Categoria:</label>
+                    <select id="productCategory">
+                        <option value="livros">📚 Livros e E-books</option>
+                        <option value="moda-feminina">👗 Moda Feminina</option>
+                        <option value="moda-masculina">👔 Moda Masculina</option>
+                        <option value="beleza">💄 Beleza e Cosméticos</option>
+                        <option value="eletronicos">📱 Eletrônicos</option>
+                        <option value="casa">🏠 Casa e Decoração</option>
+                        <option value="outros">📦 Outros</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Link do Produto:</label>
+                    <input type="url" id="productLink" placeholder="Cole o link de afiliado">
+                </div>
+
+                <div class="form-group">
+                    <label>Imagem do Produto:</label>
+                    <div class="image-upload-options">
+                        <button type="button" class="upload-btn" onclick="document.getElementById('imageFile').click()">
+                            <i class="fas fa-camera"></i> Câmera/Galeria
+                        </button>
+                        <button type="button" class="upload-btn" onclick="toggleImageUrl()">
+                            <i class="fas fa-link"></i> URL
+                        </button>
+                    </div>
+                    <input type="file" id="imageFile" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+                    <input type="url" id="productImage" placeholder="Ou cole a URL da imagem" style="display: none;">
+                    <img id="imagePreview" class="image-preview" alt="Preview">
                 </div>
 
                 <button class="btn-submit" onclick="addProduct()">
@@ -635,16 +641,17 @@
 
     <script>
         // Configuracao do Supabase
-        const SUPABASE_URL = 'https://qjneiombtvifibolfvel.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqbmVpb21idHZpZmlib2xmdmVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA4ODYyMDMsImV4cCI6MjA3NjQ2MjIwM30.ov3_CzDuo1Cj0brmePBbPDIIh5R6JUV_RtBQ2UWy9G0';
+        const SUPABASE_URL = 'https://xyzcompany.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example';
         
-        // Inicializar Supabase
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         
         let allProducts = [];
+        let currentCategory = 'todas';
         const ADMIN_PASSWORD = 'aguias2025';
+        let uploadedImageData = null;
 
-        // Carregar produtos do Supabase
+        // Carregar produtos
         async function loadProducts() {
             try {
                 const { data, error } = await supabase
@@ -653,7 +660,6 @@
                     .order('created_at', { ascending: false });
 
                 if (error) {
-                    console.error('Erro ao carregar produtos:', error);
                     loadProductsFromLocalStorage();
                     updateConnectionStatus(false);
                     return;
@@ -664,25 +670,21 @@
                 displayProducts();
                 updateConnectionStatus(true);
             } catch (err) {
-                console.error('Erro na conexao:', err);
                 loadProductsFromLocalStorage();
                 updateConnectionStatus(false);
             }
         }
 
-        // Fallback: carregar do localStorage
         function loadProductsFromLocalStorage() {
             const saved = localStorage.getItem('aguias_products');
             allProducts = saved ? JSON.parse(saved) : [];
             displayProducts();
         }
 
-        // Salvar no localStorage como backup
         function saveToLocalStorage() {
             localStorage.setItem('aguias_products', JSON.stringify(allProducts));
         }
 
-        // Atualizar status de conexao
         function updateConnectionStatus(isOnline) {
             const status = document.getElementById('connectionStatus');
             if (isOnline) {
@@ -694,15 +696,37 @@
             }
         }
 
+        // Upload de imagem
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImageData = e.target.result;
+                    document.getElementById('imagePreview').src = uploadedImageData;
+                    document.getElementById('imagePreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function toggleImageUrl() {
+            const urlInput = document.getElementById('productImage');
+            urlInput.style.display = urlInput.style.display === 'none' ? 'block' : 'none';
+        }
+
         // Adicionar produto
         async function addProduct() {
             const name = document.getElementById('productName').value.trim();
             const price = document.getElementById('productPrice').value.trim();
             const link = document.getElementById('productLink').value.trim();
-            const image = document.getElementById('productImage').value.trim();
+            const platform = document.getElementById('productPlatform').value;
+            const category = document.getElementById('productCategory').value;
+            const imageUrl = document.getElementById('productImage').value.trim();
+            const image = uploadedImageData || imageUrl;
 
             if (!name || !price || !link || !image) {
-                alert('⚠️ Por favor, preencha todos os campos!');
+                alert('⚠️ Preencha todos os campos!');
                 return;
             }
 
@@ -711,6 +735,8 @@
                 price: price,
                 link: link,
                 image: image,
+                platform: platform,
+                category: category,
                 created_at: new Date().toISOString()
             };
 
@@ -721,7 +747,6 @@
                     .select();
 
                 if (error) {
-                    console.error('Erro ao salvar no Supabase:', error);
                     allProducts.unshift(newProduct);
                     saveToLocalStorage();
                     updateConnectionStatus(false);
@@ -730,16 +755,17 @@
                     updateConnectionStatus(true);
                 }
 
-                // Limpar formulario
+                // Limpar
                 document.getElementById('productName').value = '';
                 document.getElementById('productPrice').value = '';
                 document.getElementById('productLink').value = '';
                 document.getElementById('productImage').value = '';
+                document.getElementById('imagePreview').style.display = 'none';
+                uploadedImageData = null;
 
                 displayProducts();
-                alert('✅ Produto adicionado com sucesso!');
+                alert('✅ Produto adicionado!');
             } catch (err) {
-                console.error('Erro ao adicionar produto:', err);
                 allProducts.unshift(newProduct);
                 saveToLocalStorage();
                 displayProducts();
@@ -751,51 +777,25 @@
         // Exibir produtos
         function displayProducts() {
             const container = document.getElementById('productsContainer');
+            let filtered = allProducts;
 
-            if (allProducts.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-box-open"></i>
-                        <h2>Nenhum produto cadastrado ainda</h2>
-                        <p>Use o painel de administração para adicionar produtos!</p>
-                    </div>
-                `;
-                return;
+            if (currentCategory !== 'todas') {
+                filtered = allProducts.filter(p => p.category === currentCategory);
             }
 
-            container.innerHTML = '<div class="products-grid">' + 
-                allProducts.map(product => `
-                    <div class="product-card">
-                        <img src="${product.image}" alt="${product.name}" class="product-image" 
-                             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%23667eea%22 width=%22400%22 height=%22300%22/><text x=%2250%%22 y=%2250%%22 fill=%22white%22 font-size=%2224%22 text-anchor=%22middle%22 dy=%22.3em%22>🦅 Águias Vitrine</text></svg>'">
-                        <div class="product-info">
-                            <div class="product-name">${product.name}</div>
-                            <div class="product-price">${product.price}</div>
-                            <a href="${product.link}" target="_blank" class="product-link">
-                                <i class="fas fa-shopping-cart"></i> Ver Oferta
-                            </a>
-                        </div>
-                    </div>
-                `).join('') + 
-            '</div>';
-        }
-
-        // Filtrar produtos
-        function filterProducts() {
             const search = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = allProducts.filter(p => 
-                p.name.toLowerCase().includes(search) || 
-                p.price.toLowerCase().includes(search)
-            );
+            if (search) {
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(search) || 
+                    p.price.toLowerCase().includes(search)
+                );
+            }
 
-            const container = document.getElementById('productsContainer');
-            
             if (filtered.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
-                        <i class="fas fa-search"></i>
+                        <i class="fas fa-box-open"></i>
                         <h2>Nenhum produto encontrado</h2>
-                        <p>Tente buscar por outro termo</p>
                     </div>
                 `;
                 return;
@@ -804,8 +804,12 @@
             container.innerHTML = '<div class="products-grid">' + 
                 filtered.map(product => `
                     <div class="product-card">
-                        <img src="${product.image}" alt="${product.name}" class="product-image"
-                             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%23667eea%22 width=%22400%22 height=%22300%22/><text x=%2250%%22 y=%2250%%22 fill=%22white%22 font-size=%2224%22 text-anchor=%22middle%22 dy=%22.3em%22>🦅 Águias Vitrine</text></svg>'">
+                        <div class="product-badges">
+                            ${product.platform ? `<span class="badge badge-platform">${product.platform}</span>` : ''}
+                            ${product.category ? `<span class="badge badge-category">${getCategoryName(product.category)}</span>` : ''}
+                        </div>
+                        <img src="${product.image}" alt="${product.name}" class="product-image" 
+                             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%23667eea%22 width=%22400%22 height=%22300%22/><text x=%2250%%22 y=%2250%%22 fill=%22white%22 font-size=%2224%22 text-anchor=%22middle%22>🦅</text></svg>'">
                         <div class="product-info">
                             <div class="product-name">${product.name}</div>
                             <div class="product-price">${product.price}</div>
@@ -818,7 +822,30 @@
             '</div>';
         }
 
-        // Modal de administracao
+        function getCategoryName(category) {
+            const names = {
+                'livros': '📚 Livros',
+                'moda-feminina': '👗 Moda Fem',
+                'moda-masculina': '👔 Moda Masc',
+                'beleza': '💄 Beleza',
+                'eletronicos': '📱 Eletrônicos',
+                'casa': '🏠 Casa',
+                'outros': '📦 Outros'
+            };
+            return names[category] || category;
+        }
+
+        function filterByCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            displayProducts();
+        }
+
+        function filterProducts() {
+            displayProducts();
+        }
+
         function openAdminModal() {
             document.getElementById('adminModal').style.display = 'block';
         }
@@ -838,7 +865,6 @@
             }
         }
 
-        // Fechar modal ao clicar fora
         window.onclick = function(event) {
             const modal = document.getElementById('adminModal');
             if (event.target === modal) {
@@ -846,20 +872,18 @@
             }
         }
 
-        // Subscrever a mudancas em tempo real
+        // Tempo real
         supabase
             .channel('products')
             .on('postgres_changes', { 
                 event: '*', 
                 schema: 'public', 
                 table: 'products' 
-            }, (payload) => {
-                console.log('Mudanca detectada:', payload);
+            }, () => {
                 loadProducts();
             })
             .subscribe();
 
-        // Carregar produtos ao iniciar
         loadProducts();
     </script>
 </body>
