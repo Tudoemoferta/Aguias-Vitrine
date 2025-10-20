@@ -42,66 +42,10 @@
     <link rel="canonical" href="https://aguiasvitrine.netlify.app/">
     
     <!-- Favicon e Icons -->
-    <link rel="icon" type="image/x-icon" href="eagle-logo.jpg">
-    <link rel="apple-touch-icon" sizes="180x180" href="eagle-logo.jpg">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦅</text></svg>">
     
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="eagle-background.jpg" as="image">
-    <link rel="preload" href="eagle-logo.jpg" as="image">
-    
-    <!-- DNS Prefetch -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-    
-    <!-- Structured Data - Organization -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Águias Vitrine",
-        "alternateName": "Águias Vitrine - Tudo em Oferta",
-        "description": "Site de ofertas e promoções com os melhores produtos em desconto. Eletrônicos, moda, casa, beleza e muito mais com preços imperdíveis.",
-        "url": "https://aguiasvitrine.netlify.app/",
-        "logo": "https://aguiasvitrine.netlify.app/eagle-logo.jpg",
-        "image": "https://aguiasvitrine.netlify.app/eagle-background.jpg",
-        "email": "tudoemoferta123@gmail.com",
-        "foundingDate": "2025",
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "email": "tudoemoferta123@gmail.com",
-            "contactType": "customer service",
-            "availableLanguage": "Portuguese"
-        }
-    }
-    </script>
-    
-    <!-- Structured Data - Website -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Águias Vitrine",
-        "alternateName": "Águias Vitrine - Tudo em Oferta",
-        "description": "Site de ofertas e promoções com os melhores produtos em desconto",
-        "url": "https://aguiasvitrine.netlify.app/",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://aguiasvitrine.netlify.app/?search={search_term_string}",
-            "query-input": "required name=search_term_string"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Águias Vitrine",
-            "email": "tudoemoferta123@gmail.com"
-        },
-        "inLanguage": "pt-BR",
-        "copyrightYear": "2025",
-        "genre": "E-commerce, Ofertas, Promoções"
-    }
-    </script>
-    
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
         * {
@@ -112,404 +56,152 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('eagle-background.jpg') center/cover no-repeat;
-            opacity: 0.25;
-            z-index: -1;
-            filter: brightness(1.2) contrast(1.1);
+            padding: 20px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
         }
 
-        /* Header */
-        .header {
+        header {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #667eea;
-        }
-
-        .logo h1 {
-            color: #333;
-            font-size: 1.8rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .connection-status {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 10px;
+            padding: 30px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            background: #4CAF50;
-            color: white;
-            transition: all 0.3s ease;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
-        .connection-status.offline {
-            background: #f44336;
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            color: white;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         .admin-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
+            padding: 15px 30px;
+            border-radius: 50px;
             cursor: pointer;
+            font-size: 16px;
             font-weight: bold;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
+            z-index: 1000;
         }
 
         .admin-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.4);
         }
 
-        /* Search */
-        .search-section {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 2rem 0;
-            margin: 2rem 0;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        .search-bar {
+            margin-bottom: 30px;
+            text-align: center;
         }
 
-        .search-container {
-            display: flex;
-            gap: 1rem;
+        .search-bar input {
+            width: 100%;
             max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 15px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 25px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .search-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
             padding: 15px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Categories */
-        .categories-section {
-            margin: 2rem 0;
-        }
-
-        .categories-title {
-            text-align: center;
-            color: white;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .category-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .category-card.active {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .category-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .category-card.active .category-icon {
-            color: white;
-            -webkit-text-fill-color: white;
-        }
-
-        .category-name {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .category-count {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* Products */
-        .products-section {
-            margin: 2rem 0;
-        }
-
-        .products-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .products-title {
-            color: white;
-            font-size: 1.8rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .products-stats {
-            color: white;
-            font-size: 1rem;
-            opacity: 0.9;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            background: white;
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
         }
 
         .product-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .product-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
         .product-image {
             width: 100%;
-            height: 200px;
+            height: 250px;
             object-fit: cover;
-            border-bottom: 3px solid #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        .product-content {
-            padding: 1.5rem;
+        .product-info {
+            padding: 20px;
         }
 
         .product-name {
-            font-size: 1.2rem;
+            font-size: 1.2em;
             font-weight: bold;
-            margin-bottom: 0.5rem;
             color: #333;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .product-platform {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        .product-prices {
-            margin-bottom: 1rem;
+            margin-bottom: 10px;
         }
 
         .product-price {
-            font-size: 1.5rem;
+            font-size: 1.5em;
+            color: #f5576c;
             font-weight: bold;
-            color: #4CAF50;
+            margin-bottom: 15px;
         }
 
-        .product-old-price {
-            font-size: 1rem;
-            color: #999;
-            text-decoration: line-through;
-            margin-left: 10px;
-        }
-
-        .product-discount {
-            background: #ff4444;
+        .product-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 4px 8px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-
-        .product-description {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .product-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .buy-btn {
-            flex: 1;
-            background: linear-gradient(45deg, #4CAF50, #45a049);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
+            padding: 12px 25px;
+            border-radius: 50px;
             text-decoration: none;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .buy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
-        }
-
-        .admin-actions {
-            display: none;
-            gap: 0.5rem;
-        }
-
-        .admin-actions.show {
-            display: flex;
-        }
-
-        .edit-btn, .delete-btn {
-            padding: 8px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
+            font-weight: bold;
             transition: all 0.3s ease;
         }
 
-        .edit-btn {
-            background: #2196F3;
-            color: white;
+        .product-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .delete-btn {
-            background: #f44336;
-            color: white;
-        }
-
-        /* Admin Panel */
-        .admin-panel {
+        .modal {
             display: none;
             position: fixed;
             top: 0;
@@ -521,1220 +213,418 @@
             overflow-y: auto;
         }
 
-        .admin-panel.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .admin-content {
+        .modal-content {
             background: white;
-            border-radius: 15px;
-            padding: 2rem;
             max-width: 600px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .admin-title {
-            font-size: 1.5rem;
-            color: #333;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
         }
 
         .close-btn {
-            background: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
             cursor: pointer;
-            font-weight: bold;
+            color: #999;
         }
 
-        .admin-form {
-            display: grid;
-            gap: 1rem;
+        .close-btn:hover {
+            color: #333;
         }
 
         .form-group {
-            display: grid;
-            gap: 0.5rem;
+            margin-bottom: 20px;
         }
 
-        .form-label {
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
             font-weight: bold;
             color: #333;
         }
 
-        .form-input, .form-select, .form-textarea {
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
             padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .price-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr auto;
-            gap: 1rem;
-            align-items: end;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .save-btn, .cancel-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .save-btn {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
-            color: white;
-        }
-
-        .cancel-btn {
-            background: #f44336;
-            color: white;
-        }
-
-        /* Login */
-        .login-form {
-            display: grid;
-            gap: 1rem;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-
-        .login-input {
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            text-align: center;
-        }
-
-        .login-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* Notifications */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #4CAF50;
-            color: white;
-            padding: 1rem 1.5rem;
+            border: 2px solid #ddd;
             border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            z-index: 3000;
-            transform: translateX(400px);
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
             transition: all 0.3s ease;
         }
 
-        .notification.show {
-            transform: translateX(0);
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .notification.error {
-            background: #f44336;
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 1.5em;
         }
 
-        .notification.warning {
-            background: #ff9800;
-        }
-
-        /* Empty State */
         .empty-state {
             text-align: center;
-            color: white;
-            padding: 4rem 2rem;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
+        .empty-state h2 {
+            color: #667eea;
+            margin-bottom: 15px;
         }
 
-        .empty-state h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .empty-state p {
-            opacity: 0.8;
-        }
-
-        /* Footer */
-        .footer {
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-contact {
+        .sync-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 10px;
+            z-index: 1000;
         }
 
-        /* Backup Controls */
-        .backup-controls {
-            display: none;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+        .sync-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
         }
 
-        .backup-controls.show {
-            display: flex;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
-        .backup-btn {
-            background: #2196F3;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .backup-btn:hover {
-            background: #1976D2;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .search-container {
-                flex-direction: column;
-            }
-
-            .categories-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            h1 {
+                font-size: 1.8em;
             }
 
             .products-grid {
                 grid-template-columns: 1fr;
             }
 
-            .products-header {
-                flex-direction: column;
-                text-align: center;
+            .admin-btn {
+                top: 10px;
+                right: 10px;
+                padding: 10px 20px;
+                font-size: 14px;
             }
-
-            .admin-content {
-                margin: 1rem;
-                padding: 1rem;
-            }
-
-            .price-group {
-                grid-template-columns: 1fr;
-            }
-
-            .form-actions {
-                flex-direction: column;
-            }
-
-            .backup-controls {
-                flex-direction: column;
-            }
-        }
-
-        /* Hero Section */
-        .hero-section {
-            text-align: center;
-            padding: 4rem 0;
-            color: white;
-        }
-
-        .hero-title {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .cta-button {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
-        }
-
-        /* Breadcrumb */
-        .breadcrumb {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 0;
-            margin-bottom: 1rem;
-        }
-
-        .breadcrumb-list {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumb-item {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .breadcrumb-item.active {
-            color: white;
-            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <!-- Skip to main content for accessibility -->
-    <a href="#main-content" class="sr-only">Pular para o conteúdo principal</a>
-    
-    <!-- Header -->
-    <header class="header" role="banner">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo" itemscope itemtype="https://schema.org/Organization">
-                    <img src="eagle-logo.jpg" alt="Águias Vitrine Logo - Site de Ofertas e Promoções" itemprop="logo">
-                    <h1 itemprop="name">Águias Vitrine</h1>
-                </div>
-                <div class="header-actions">
-                    <div class="connection-status" id="connectionStatus" aria-live="polite">
-                        <i class="fas fa-wifi" aria-hidden="true"></i>
-                        <span>Online</span>
-                    </div>
-                    <button class="admin-btn" onclick="toggleAdminPanel()" aria-label="Abrir painel administrativo">
-                        <i class="fas fa-cog" aria-hidden="true"></i> Administração
-                    </button>
-                </div>
+    <div class="container">
+        <header>
+            <h1>🦅 Águias Vitrine</h1>
+            <p class="subtitle">Tudo em Oferta - Os Melhores Produtos com Descontos Imperdíveis!</p>
+            <div class="contact-info">
+                📧 <a href="mailto:tudoemoferta123@gmail.com">tudoemoferta123@gmail.com</a> | 
+                📱 Instagram: <a href="https://instagram.com/tudoemofertas123" target="_blank">@tudoemofertas123</a>
             </div>
+        </header>
+
+        <button class="admin-btn" onclick="openAdminModal()">🔐 Administração</button>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="🔍 Buscar produtos..." onkeyup="filterProducts()">
         </div>
-    </header>
 
-    <!-- Breadcrumb Navigation -->
-    <nav class="breadcrumb" aria-label="Navegação estrutural">
-        <div class="container">
-            <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
-                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a href="/" itemprop="item" itemid="https://aguiasvitrine.netlify.app/">
-                        <span itemprop="name">Início</span>
-                    </a>
-                    <meta itemprop="position" content="1" />
-                </li>
-                <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <span itemprop="name" id="breadcrumbCurrent">Todos os Produtos</span>
-                    <meta itemprop="position" content="2" />
-                </li>
-            </ol>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section" role="banner">
-        <div class="container">
-            <h1 class="hero-title">🦅 Ofertas Imperdíveis Todos os Dias!</h1>
-            <p class="hero-subtitle">Encontre os melhores produtos com descontos de até 70% na Águias Vitrine</p>
-            <a href="#products" class="cta-button">Ver Ofertas Agora</a>
-        </div>
-    </section>
-
-    <!-- Search Section -->
-    <section class="search-section" role="search" aria-label="Buscar produtos">
-        <div class="container">
-            <div class="search-container">
-                <input type="text" class="search-input" id="searchInput" 
-                       placeholder="Buscar produto por nome ou código..." 
-                       aria-label="Campo de busca de produtos">
-                <button class="search-btn" onclick="searchProducts()" aria-label="Executar busca">
-                    <i class="fas fa-search" aria-hidden="true"></i> Buscar
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Categories Section -->
-    <section class="categories-section" role="navigation" aria-label="Categorias de produtos">
-        <div class="container">
-            <h2 class="categories-title">Categorias de Produtos</h2>
-            <div class="categories-grid" id="categoriesGrid" role="list">
-                <!-- Categories will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Products Section -->
-    <main id="main-content" class="products-section" role="main">
-        <div class="container">
-            <div class="products-header">
-                <h2 class="products-title" id="productsTitle">Todos os Produtos em Oferta</h2>
-                <div class="products-stats" id="productsStats" aria-live="polite">0 produtos encontrados</div>
-            </div>
-            <div class="products-grid" id="productsGrid" role="list">
-                <!-- Products will be populated by JavaScript -->
-            </div>
-            <div class="empty-state" id="emptyState" style="display: none;" role="status">
-                <i class="fas fa-box-open" aria-hidden="true"></i>
-                <h3>Nenhum produto encontrado</h3>
-                <p>Não há produtos cadastrados nesta categoria ainda. Volte em breve para ver nossas ofertas!</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-content" itemscope itemtype="https://schema.org/Organization">
-                <div class="footer-contact">
-                    <i class="fas fa-envelope" aria-hidden="true"></i>
-                    <span itemprop="email">tudoemoferta123@gmail.com</span>
-                </div>
-                <div>
-                    <span>&copy; 2025 <span itemprop="name">Águias Vitrine</span> - Todos os direitos reservados</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Admin Panel -->
-    <div class="admin-panel" id="adminPanel" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
-        <div class="admin-content">
-            <div class="admin-header">
-                <h2 class="admin-title" id="adminTitle">Login Administrativo</h2>
-                <button class="close-btn" onclick="closeAdminPanel()" aria-label="Fechar painel administrativo">
-                    <i class="fas fa-times" aria-hidden="true"></i>
-                </button>
-            </div>
-            
-            <!-- Login Form -->
-            <div id="loginSection">
-                <form class="login-form" onsubmit="login(event)">
-                    <input type="password" class="login-input" id="passwordInput" 
-                           placeholder="Digite a senha de administrador" 
-                           aria-label="Senha de administrador" required>
-                    <button type="submit" class="login-btn">
-                        <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Entrar
-                    </button>
-                </form>
-            </div>
-
-            <!-- Admin Dashboard -->
-            <div id="adminDashboard" style="display: none;">
-                <div class="backup-controls show">
-                    <button class="backup-btn" onclick="exportProducts()" aria-label="Exportar produtos">
-                        <i class="fas fa-download" aria-hidden="true"></i> Exportar
-                    </button>
-                    <button class="backup-btn" onclick="importProducts()" aria-label="Importar produtos">
-                        <i class="fas fa-upload" aria-hidden="true"></i> Importar
-                    </button>
-                    <button class="backup-btn" onclick="syncProducts()" aria-label="Sincronizar produtos">
-                        <i class="fas fa-sync" aria-hidden="true"></i> Sincronizar
-                    </button>
-                </div>
-                
-                <!-- Product Form -->
-                <form class="admin-form" id="productForm" onsubmit="saveProduct(event)">
-                    <div class="form-group">
-                        <label class="form-label" for="productName">Nome do Produto *</label>
-                        <input type="text" class="form-input" id="productName" required 
-                               aria-describedby="productNameHelp">
-                        <small id="productNameHelp">Digite o nome completo do produto</small>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="productCategory">Categoria *</label>
-                        <select class="form-select" id="productCategory" required>
-                            <option value="">Selecione uma categoria</option>
-                            <option value="vestimentas">Vestimentas e Acessórios</option>
-                            <option value="eletronicos">Eletrônicos</option>
-                            <option value="celular">Celular</option>
-                            <option value="casa">Casa e Decoração</option>
-                            <option value="beleza">Beleza</option>
-                            <option value="utilidades">Utilidades em Geral</option>
-                            <option value="ebooks">E-books</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="productPlatform">Plataforma *</label>
-                        <select class="form-select" id="productPlatform" required>
-                            <option value="">Selecione a plataforma</option>
-                            <option value="Amazon">Amazon</option>
-                            <option value="AliExpress">AliExpress</option>
-                            <option value="Mercado Livre">Mercado Livre</option>
-                            <option value="Shopee">Shopee</option>
-                            <option value="Magazine Luiza">Magazine Luiza</option>
-                            <option value="Americanas">Americanas</option>
-                            <option value="Casas Bahia">Casas Bahia</option>
-                            <option value="Submarino">Submarino</option>
-                            <option value="Outro">Outro</option>
-                        </select>
-                    </div>
-                    
-                    <div class="price-group">
-                        <div class="form-group">
-                            <label class="form-label" for="productPrice">Preço Atual (R$) *</label>
-                            <input type="number" class="form-input" id="productPrice" step="0.01" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="productOldPrice">Preço Anterior (R$)</label>
-                            <input type="number" class="form-input" id="productOldPrice" step="0.01">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="productDiscount">Desconto (%)</label>
-                            <input type="number" class="form-input" id="productDiscount" readonly>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="productLink">Link de Afiliado *</label>
-                        <input type="url" class="form-input" id="productLink" required 
-                               placeholder="https://..." aria-describedby="linkHelp">
-                        <small id="linkHelp">Cole aqui seu link de afiliado</small>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="productImage">URL da Imagem *</label>
-                        <input type="url" class="form-input" id="productImage" required 
-                               placeholder="https://..." aria-describedby="imageHelp">
-                        <small id="imageHelp">URL da imagem do produto</small>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="productCode">Código do Produto</label>
-                        <input type="text" class="form-input" id="productCode" 
-                               placeholder="SKU, código de barras, etc.">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="productDescription">Descrição</label>
-                        <textarea class="form-textarea" id="productDescription" 
-                                  placeholder="Descreva o produto, suas características principais..."
-                                  aria-describedby="descHelp"></textarea>
-                        <small id="descHelp">Descrição detalhada para SEO</small>
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button type="submit" class="save-btn">
-                            <i class="fas fa-save" aria-hidden="true"></i> 
-                            <span id="saveButtonText">Salvar Produto</span>
-                        </button>
-                        <button type="button" class="cancel-btn" onclick="cancelEdit()">
-                            <i class="fas fa-times" aria-hidden="true"></i> Cancelar
-                        </button>
-                    </div>
-                </form>
-            </div>
+        <div id="productsContainer" class="loading">
+            ⏳ Carregando produtos...
         </div>
     </div>
 
-    <!-- Hidden file input for import -->
-    <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="handleFileImport(event)">
+    <div class="sync-indicator">
+        <div class="sync-dot"></div>
+        <span>Sincronizado</span>
+    </div>
 
-    <!-- Schema.org Product List -->
-    <script type="application/ld+json" id="productListSchema">
-    {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "name": "Produtos em Oferta - Águias Vitrine",
-        "description": "Lista de produtos em promoção com os melhores descontos",
-        "url": "https://aguiasvitrine.netlify.app/",
-        "numberOfItems": 0,
-        "itemListElement": []
-    }
-    </script>
+    <!-- Modal de Administração -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAdminModal()">&times;</span>
+            <h2 style="color: #667eea; margin-bottom: 20px;">🔐 Painel de Administração</h2>
+            
+            <div class="form-group">
+                <label>Senha de Administrador:</label>
+                <input type="password" id="adminPassword" placeholder="Digite a senha">
+            </div>
+
+            <div id="adminForm" style="display: none;">
+                <h3 style="color: #667eea; margin: 30px 0 20px;">➕ Adicionar Novo Produto</h3>
+                
+                <div class="form-group">
+                    <label>Nome do Produto:</label>
+                    <input type="text" id="productName" placeholder="Ex: Fone de Ouvido Bluetooth">
+                </div>
+
+                <div class="form-group">
+                    <label>Preço:</label>
+                    <input type="text" id="productPrice" placeholder="Ex: R$ 89,90">
+                </div>
+
+                <div class="form-group">
+                    <label>Link do Produto:</label>
+                    <input type="url" id="productLink" placeholder="Cole o link de afiliado aqui">
+                </div>
+
+                <div class="form-group">
+                    <label>URL da Imagem:</label>
+                    <input type="url" id="productImage" placeholder="Cole a URL da imagem do produto">
+                </div>
+
+                <button class="btn-submit" onclick="addProduct()">➕ Adicionar Produto</button>
+            </div>
+
+            <button class="btn-submit" id="loginBtn" onclick="checkPassword()">🔓 Entrar</button>
+        </div>
+    </div>
 
     <script>
-        // Global Variables
-        let products = [];
-        let currentFilter = 'all';
-        let isAdmin = false;
-        let editingProductId = null;
-        let isOnline = true;
+        // Configuração do Supabase
+        const SUPABASE_URL = 'https://qjneiombtvifibolfvel.supabase.co
+';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqbmVpb21idHZpZmlib2xmdmVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA4ODYyMDMsImV4cCI6MjA3NjQ2MjIwM30.ov3_CzDuo1Cj0brmePBbPDIIh5R6JUV_RtBQ2UWy9G0';
+        
+        // Inicializar Supabase
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        let allProducts = [];
         const ADMIN_PASSWORD = 'aguias2025';
-        const STORAGE_KEY = 'aguiasVitrineProducts';
-        const SYNC_URL = 'https://api.restful-api.dev/objects'; // Free public API for testing
 
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
-        });
-
-        // Initialize application
-        async function initializeApp() {
+        // Carregar produtos do Supabase
+        async function loadProducts() {
             try {
-                // Load products from local storage first
-                loadProductsFromLocal();
-                
-                // Setup event listeners
-                setupEventListeners();
-                
-                // Initial render
-                renderCategories();
-                renderProducts();
-                updateStats();
-                updateBreadcrumb();
-                updateProductSchema();
-                
-                // Try to sync with online storage
-                await syncWithOnlineStorage();
-                
-                showNotification('Site carregado com sucesso!');
-                
-            } catch (error) {
-                console.error('Error initializing app:', error);
-                // Fallback to local storage only
-                loadProductsFromLocal();
-                renderCategories();
-                renderProducts();
-                updateStats();
-                showNotification('Usando dados locais', 'warning');
-            }
-        }
+                const { data, error } = await supabase
+                    .from('products')
+                    .select('*')
+                    .order('created_at', { ascending: false });
 
-        // Sync with online storage (using a free public API)
-        async function syncWithOnlineStorage() {
-            try {
-                // This is a simplified sync - in production you'd use a proper backend
-                // For now, we'll just use localStorage as the primary storage
-                isOnline = navigator.onLine;
-                updateConnectionStatus(isOnline);
-                
-                // Listen for online/offline events
-                window.addEventListener('online', () => {
-                    isOnline = true;
-                    updateConnectionStatus(true);
-                    showNotification('Conexão restaurada!');
-                });
-                
-                window.addEventListener('offline', () => {
-                    isOnline = false;
-                    updateConnectionStatus(false);
-                    showNotification('Sem conexão - usando dados locais', 'warning');
-                });
-                
-            } catch (error) {
-                console.error('Error syncing with online storage:', error);
-                isOnline = false;
-                updateConnectionStatus(false);
-            }
-        }
-
-        // Update connection status UI
-        function updateConnectionStatus(online) {
-            const statusElement = document.getElementById('connectionStatus');
-            const icon = statusElement.querySelector('i');
-            const text = statusElement.querySelector('span');
-            
-            if (online) {
-                statusElement.className = 'connection-status';
-                icon.className = 'fas fa-wifi';
-                text.textContent = 'Online';
-            } else {
-                statusElement.className = 'connection-status offline';
-                icon.className = 'fas fa-wifi-slash';
-                text.textContent = 'Offline';
-            }
-        }
-
-        // Load products from local storage
-        function loadProductsFromLocal() {
-            try {
-                const stored = localStorage.getItem(STORAGE_KEY);
-                products = stored ? JSON.parse(stored) : [];
-            } catch (error) {
-                console.error('Error loading from local storage:', error);
-                products = [];
-            }
-        }
-
-        // Save products to local storage
-        function saveProductsToLocal() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-                return true;
-            } catch (error) {
-                console.error('Error saving to local storage:', error);
-                return false;
-            }
-        }
-
-        // Setup event listeners
-        function setupEventListeners() {
-            // Search input
-            document.getElementById('searchInput').addEventListener('input', debounce(searchProducts, 300));
-            
-            // Price calculation
-            document.getElementById('productPrice').addEventListener('input', calculateDiscount);
-            document.getElementById('productOldPrice').addEventListener('input', calculateDiscount);
-            
-            // Enter key for search
-            document.getElementById('searchInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    searchProducts();
+                if (error) {
+                    console.error('Erro ao carregar produtos:', error);
+                    // Fallback para localStorage se Supabase falhar
+                    loadProductsFromLocalStorage();
+                    return;
                 }
-            });
-        }
 
-        // Update breadcrumb navigation
-        function updateBreadcrumb() {
-            const breadcrumb = document.getElementById('breadcrumbCurrent');
-            if (breadcrumb) {
-                const title = currentFilter === 'all' ? 'Todos os Produtos' : 
-                             document.querySelector(`[onclick="filterByCategory('${currentFilter}')"] .category-name`)?.textContent || 'Produtos';
-                breadcrumb.textContent = title;
+                allProducts = data || [];
+                displayProducts();
+            } catch (err) {
+                console.error('Erro na conexão:', err);
+                loadProductsFromLocalStorage();
             }
         }
 
-        // Update product schema for SEO
-        function updateProductSchema() {
-            const schema = {
-                "@context": "https://schema.org",
-                "@type": "ItemList",
-                "name": "Produtos em Oferta - Águias Vitrine",
-                "description": "Lista de produtos em promoção com os melhores descontos",
-                "url": "https://aguiasvitrine.netlify.app/",
-                "numberOfItems": products.length,
-                "itemListElement": products.map((product, index) => ({
-                    "@type": "ListItem",
-                    "position": index + 1,
-                    "item": {
-                        "@type": "Product",
-                        "name": product.name,
-                        "description": product.description || `${product.name} com desconto especial na ${product.platform}`,
-                        "image": product.image,
-                        "url": product.link,
-                        "sku": product.code || product.id,
-                        "brand": {
-                            "@type": "Brand",
-                            "name": product.platform
-                        },
-                        "offers": {
-                            "@type": "Offer",
-                            "price": product.price,
-                            "priceCurrency": "BRL",
-                            "availability": "https://schema.org/InStock",
-                            "seller": {
-                                "@type": "Organization",
-                                "name": product.platform
-                            }
-                        }
-                    }
-                }))
+        // Fallback: carregar do localStorage
+        function loadProductsFromLocalStorage() {
+            const saved = localStorage.getItem('aguias_products');
+            allProducts = saved ? JSON.parse(saved) : [];
+            displayProducts();
+        }
+
+        // Salvar no localStorage como backup
+        function saveToLocalStorage() {
+            localStorage.setItem('aguias_products', JSON.stringify(allProducts));
+        }
+
+        // Adicionar produto
+        async function addProduct() {
+            const name = document.getElementById('productName').value.trim();
+            const price = document.getElementById('productPrice').value.trim();
+            const link = document.getElementById('productLink').value.trim();
+            const image = document.getElementById('productImage').value.trim();
+
+            if (!name || !price || !link || !image) {
+                alert('⚠️ Por favor, preencha todos os campos!');
+                return;
+            }
+
+            const newProduct = {
+                name: name,
+                price: price,
+                link: link,
+                image: image,
+                created_at: new Date().toISOString()
             };
-            
-            const schemaScript = document.getElementById('productListSchema');
-            if (schemaScript) {
-                schemaScript.textContent = JSON.stringify(schema);
+
+            try {
+                // Tentar salvar no Supabase
+                const { data, error } = await supabase
+                    .from('products')
+                    .insert([newProduct])
+                    .select();
+
+                if (error) {
+                    console.error('Erro ao salvar no Supabase:', error);
+                    // Fallback para localStorage
+                    allProducts.unshift(newProduct);
+                    saveToLocalStorage();
+                } else {
+                    allProducts.unshift(data[0]);
+                }
+
+                // Limpar formulário
+                document.getElementById('productName').value = '';
+                document.getElementById('productPrice').value = '';
+                document.getElementById('productLink').value = '';
+                document.getElementById('productImage').value = '';
+
+                displayProducts();
+                alert('✅ Produto adicionado com sucesso!');
+            } catch (err) {
+                console.error('Erro ao adicionar produto:', err);
+                // Fallback para localStorage
+                allProducts.unshift(newProduct);
+                saveToLocalStorage();
+                displayProducts();
+                alert('✅ Produto adicionado localmente!');
             }
         }
 
-        // Render categories
-        function renderCategories() {
-            const categoriesGrid = document.getElementById('categoriesGrid');
-            const categories = [
-                { id: 'all', name: 'Todos os Produtos', icon: 'fas fa-th-large' },
-                { id: 'vestimentas', name: 'Vestimentas e Acessórios', icon: 'fas fa-tshirt' },
-                { id: 'eletronicos', name: 'Eletrônicos', icon: 'fas fa-laptop' },
-                { id: 'celular', name: 'Celular', icon: 'fas fa-mobile-alt' },
-                { id: 'casa', name: 'Casa e Decoração', icon: 'fas fa-home' },
-                { id: 'beleza', name: 'Beleza', icon: 'fas fa-heart' },
-                { id: 'utilidades', name: 'Utilidades em Geral', icon: 'fas fa-tools' },
-                { id: 'ebooks', name: 'E-books', icon: 'fas fa-book' }
-            ];
-            
-            categoriesGrid.innerHTML = categories.map(category => {
-                const count = category.id === 'all' ? products.length : products.filter(p => p.category === category.id).length;
-                const isActive = currentFilter === category.id ? 'active' : '';
-                
-                return `
-                    <div class="category-card ${isActive}" onclick="filterByCategory('${category.id}')" 
-                         role="listitem" tabindex="0" 
-                         onkeypress="if(event.key==='Enter') filterByCategory('${category.id}')"
-                         aria-label="Categoria ${category.name} com ${count} produtos">
-                        <div class="category-icon">
-                            <i class="${category.icon}" aria-hidden="true"></i>
-                        </div>
-                        <div class="category-name">${category.name}</div>
-                        <div class="category-count">${count} produtos</div>
+        // Exibir produtos
+        function displayProducts() {
+            const container = document.getElementById('productsContainer');
+
+            if (allProducts.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h2>📦 Nenhum produto cadastrado ainda</h2>
+                        <p>Use o painel de administração para adicionar produtos!</p>
                     </div>
                 `;
-            }).join('');
-        }
-
-        // Filter by category
-        function filterByCategory(category) {
-            currentFilter = category;
-            renderCategories();
-            renderProducts();
-            updateStats();
-            updateBreadcrumb();
-            
-            // Update title
-            const title = category === 'all' ? 'Todos os Produtos em Oferta' : 
-                         document.querySelector(`[onclick="filterByCategory('${category}')"] .category-name`).textContent + ' em Oferta';
-            document.getElementById('productsTitle').textContent = title;
-        }
-
-        // Search products
-        function searchProducts() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-            
-            if (!searchTerm) {
-                renderProducts();
                 return;
             }
-            
-            const filteredProducts = products.filter(product => 
-                product.name.toLowerCase().includes(searchTerm) ||
-                (product.code && product.code.toLowerCase().includes(searchTerm)) ||
-                (product.description && product.description.toLowerCase().includes(searchTerm)) ||
-                (product.platform && product.platform.toLowerCase().includes(searchTerm))
-            );
-            
-            renderFilteredProducts(filteredProducts);
-            document.getElementById('productsTitle').textContent = `Resultados para "${searchTerm}"`;
-            document.getElementById('productsStats').textContent = `${filteredProducts.length} produtos encontrados`;
-        }
 
-        // Render products
-        function renderProducts() {
-            let filteredProducts = products;
-            
-            if (currentFilter !== 'all') {
-                filteredProducts = products.filter(p => p.category === currentFilter);
-            }
-            
-            renderFilteredProducts(filteredProducts);
-        }
-
-        // Render filtered products
-        function renderFilteredProducts(filteredProducts) {
-            const productsGrid = document.getElementById('productsGrid');
-            const emptyState = document.getElementById('emptyState');
-            
-            if (filteredProducts.length === 0) {
-                productsGrid.innerHTML = '';
-                emptyState.style.display = 'block';
-                return;
-            }
-            
-            emptyState.style.display = 'none';
-            
-            productsGrid.innerHTML = filteredProducts.map(product => {
-                const discount = product.oldPrice && product.price ? 
-                    Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100) : 0;
-                
-                return `
-                    <article class="product-card" itemscope itemtype="https://schema.org/Product" role="listitem">
+            container.innerHTML = '<div class="products-grid">' + 
+                allProducts.map(product => `
+                    <div class="product-card">
                         <img src="${product.image}" alt="${product.name}" class="product-image" 
-                             itemprop="image" loading="lazy"
-                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlbSBuw6NvIGVuY29udHJhZGE8L3RleHQ+PC9zdmc+'">
-                        <div class="product-content">
-                            <h3 class="product-name" itemprop="name">${product.name}</h3>
-                            <div class="product-platform" itemprop="brand" itemscope itemtype="https://schema.org/Brand">
-                                <span itemprop="name">${product.platform}</span>
-                            </div>
-                            <div class="product-prices" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                                <span class="product-price" itemprop="price" content="${product.price}">R$ ${parseFloat(product.price).toFixed(2)}</span>
-                                <meta itemprop="priceCurrency" content="BRL">
-                                ${product.oldPrice ? `<span class="product-old-price">R$ ${parseFloat(product.oldPrice).toFixed(2)}</span>` : ''}
-                                ${discount > 0 ? `<span class="product-discount">-${discount}%</span>` : ''}
-                                <meta itemprop="availability" content="https://schema.org/InStock">
-                                <meta itemprop="url" content="${product.link}">
-                            </div>
-                            ${product.description ? `<p class="product-description" itemprop="description">${product.description}</p>` : ''}
-                            ${product.code ? `<meta itemprop="sku" content="${product.code}">` : ''}
-                            <div class="product-actions">
-                                <a href="${product.link}" target="_blank" rel="noopener" class="buy-btn" 
-                                   aria-label="Comprar ${product.name} na ${product.platform}">
-                                    <i class="fas fa-shopping-cart" aria-hidden="true"></i> Comprar
-                                </a>
-                                <div class="admin-actions ${isAdmin ? 'show' : ''}">
-                                    <button class="edit-btn" onclick="editProduct('${product.id}')" 
-                                            aria-label="Editar produto ${product.name}">
-                                        <i class="fas fa-edit" aria-hidden="true"></i>
-                                    </button>
-                                    <button class="delete-btn" onclick="deleteProduct('${product.id}')" 
-                                            aria-label="Excluir produto ${product.name}">
-                                        <i class="fas fa-trash" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
+                             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%23667eea%22 width=%22400%22 height=%22300%22/><text x=%2250%%22 y=%2250%%22 fill=%22white%22 font-size=%2224%22 text-anchor=%22middle%22>🦅 Águias Vitrine</text></svg>'">
+                        <div class="product-info">
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-price">${product.price}</div>
+                            <a href="${product.link}" target="_blank" class="product-link">
+                                🛒 Ver Oferta
+                            </a>
                         </div>
-                    </article>
+                    </div>
+                `).join('') + 
+            '</div>';
+        }
+
+        // Filtrar produtos
+        function filterProducts() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allProducts.filter(p => 
+                p.name.toLowerCase().includes(search) || 
+                p.price.toLowerCase().includes(search)
+            );
+
+            const container = document.getElementById('productsContainer');
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h2>🔍 Nenhum produto encontrado</h2>
+                        <p>Tente buscar por outro termo</p>
+                    </div>
                 `;
-            }).join('');
-        }
-
-        // Update stats
-        function updateStats() {
-            let filteredProducts = products;
-            
-            if (currentFilter !== 'all') {
-                filteredProducts = products.filter(p => p.category === currentFilter);
-            }
-            
-            document.getElementById('productsStats').textContent = 
-                `${filteredProducts.length} produtos encontrados`;
-        }
-
-        // Admin functions
-        function toggleAdminPanel() {
-            const panel = document.getElementById('adminPanel');
-            panel.classList.add('show');
-            
-            if (isAdmin) {
-                showAdminDashboard();
-            } else {
-                showLoginForm();
-            }
-        }
-
-        function closeAdminPanel() {
-            document.getElementById('adminPanel').classList.remove('show');
-            resetForm();
-        }
-
-        function showLoginForm() {
-            document.getElementById('loginSection').style.display = 'block';
-            document.getElementById('adminDashboard').style.display = 'none';
-            document.getElementById('adminTitle').textContent = 'Login Administrativo';
-            document.getElementById('passwordInput').focus();
-        }
-
-        function showAdminDashboard() {
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('adminDashboard').style.display = 'block';
-            document.getElementById('adminTitle').textContent = 'Painel Administrativo';
-        }
-
-        function login(event) {
-            if (event) event.preventDefault();
-            
-            const password = document.getElementById('passwordInput').value;
-            
-            if (password === ADMIN_PASSWORD) {
-                isAdmin = true;
-                showAdminDashboard();
-                renderProducts(); // Refresh to show admin buttons
-                showNotification('Login realizado com sucesso!');
-                document.getElementById('passwordInput').value = '';
-            } else {
-                showNotification('Senha incorreta!', 'error');
-                document.getElementById('passwordInput').value = '';
-                document.getElementById('passwordInput').focus();
-            }
-        }
-
-        // Product management
-        function calculateDiscount() {
-            const price = parseFloat(document.getElementById('productPrice').value) || 0;
-            const oldPrice = parseFloat(document.getElementById('productOldPrice').value) || 0;
-            
-            if (price > 0 && oldPrice > 0 && oldPrice > price) {
-                const discount = Math.round(((oldPrice - price) / oldPrice) * 100);
-                document.getElementById('productDiscount').value = discount;
-            } else {
-                document.getElementById('productDiscount').value = '';
-            }
-        }
-
-        function saveProduct(event) {
-            event.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('productName').value.trim(),
-                category: document.getElementById('productCategory').value,
-                platform: document.getElementById('productPlatform').value,
-                price: parseFloat(document.getElementById('productPrice').value),
-                oldPrice: parseFloat(document.getElementById('productOldPrice').value) || null,
-                link: document.getElementById('productLink').value.trim(),
-                image: document.getElementById('productImage').value.trim(),
-                code: document.getElementById('productCode').value.trim(),
-                description: document.getElementById('productDescription').value.trim(),
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString()
-            };
-            
-            // Validation
-            if (!formData.name || !formData.category || !formData.platform || 
-                !formData.price || !formData.link || !formData.image) {
-                showNotification('Preencha todos os campos obrigatórios!', 'error');
                 return;
             }
-            
-            try {
-                if (editingProductId) {
-                    // Update existing product
-                    const index = products.findIndex(p => p.id === editingProductId);
-                    if (index !== -1) {
-                        products[index] = { id: editingProductId, ...formData };
-                    }
-                    showNotification('Produto atualizado com sucesso!');
-                } else {
-                    // Add new product
-                    const newProduct = {
-                        id: generateId(),
-                        ...formData
-                    };
-                    products.push(newProduct);
-                    showNotification('Produto adicionado com sucesso!');
-                }
-                
-                // Save to local storage
-                saveProductsToLocal();
-                
-                resetForm();
-                renderProducts();
-                renderCategories();
-                updateStats();
-                updateProductSchema();
-                
-            } catch (error) {
-                console.error('Error saving product:', error);
-                showNotification('Erro ao salvar produto. Tente novamente.', 'error');
+
+            container.innerHTML = '<div class="products-grid">' + 
+                filtered.map(product => `
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.name}" class="product-image"
+                             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%23667eea%22 width=%22400%22 height=%22300%22/><text x=%2250%%22 y=%2250%%22 fill=%22white%22 font-size=%2224%22 text-anchor=%22middle%22>🦅 Águias Vitrine</text></svg>'">
+                        <div class="product-info">
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-price">${product.price}</div>
+                            <a href="${product.link}" target="_blank" class="product-link">
+                                🛒 Ver Oferta
+                            </a>
+                        </div>
+                    </div>
+                `).join('') + 
+            '</div>';
+        }
+
+        // Modal de administração
+        function openAdminModal() {
+            document.getElementById('adminModal').style.display = 'block';
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('adminForm').style.display = 'block';
+                document.getElementById('loginBtn').style.display = 'none';
+                document.getElementById('adminPassword').style.display = 'none';
+                document.querySelector('label[for="adminPassword"]').style.display = 'none';
+            } else {
+                alert('❌ Senha incorreta!');
             }
         }
 
-        function editProduct(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-            
-            editingProductId = productId;
-            
-            // Fill form with product data
-            document.getElementById('productName').value = product.name || '';
-            document.getElementById('productCategory').value = product.category || '';
-            document.getElementById('productPlatform').value = product.platform || '';
-            document.getElementById('productPrice').value = product.price || '';
-            document.getElementById('productOldPrice').value = product.oldPrice || '';
-            document.getElementById('productLink').value = product.link || '';
-            document.getElementById('productImage').value = product.image || '';
-            document.getElementById('productCode').value = product.code || '';
-            document.getElementById('productDescription').value = product.description || '';
-            
-            calculateDiscount();
-            
-            // Update UI
-            document.getElementById('saveButtonText').textContent = 'Atualizar Produto';
-            toggleAdminPanel();
-        }
-
-        function deleteProduct(productId) {
-            if (!confirm('Tem certeza que deseja excluir este produto?')) return;
-            
-            try {
-                // Remove from local array
-                products = products.filter(p => p.id !== productId);
-                
-                // Save to local storage
-                saveProductsToLocal();
-                
-                renderProducts();
-                renderCategories();
-                updateStats();
-                updateProductSchema();
-                
-                showNotification('Produto excluído com sucesso!');
-                
-            } catch (error) {
-                console.error('Error deleting product:', error);
-                showNotification('Erro ao excluir produto. Tente novamente.', 'error');
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('adminModal');
+            if (event.target === modal) {
+                closeAdminModal();
             }
         }
 
-        function cancelEdit() {
-            resetForm();
-        }
+        // Subscrever a mudanças em tempo real
+        supabase
+            .channel('products')
+            .on('postgres_changes', { 
+                event: '*', 
+                schema: 'public', 
+                table: 'products' 
+            }, (payload) => {
+                console.log('Mudança detectada:', payload);
+                loadProducts();
+            })
+            .subscribe();
 
-        function resetForm() {
-            document.getElementById('productForm').reset();
-            editingProductId = null;
-            document.getElementById('saveButtonText').textContent = 'Salvar Produto';
-            document.getElementById('productDiscount').value = '';
-        }
-
-        // Backup functions
-        function exportProducts() {
-            const dataStr = JSON.stringify(products, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            link.download = `aguias-vitrine-backup-${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
-            
-            showNotification('Backup exportado com sucesso!');
-        }
-
-        function importProducts() {
-            document.getElementById('fileInput').click();
-        }
-
-        function handleFileImport(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const importedProducts = JSON.parse(e.target.result);
-                    
-                    if (!Array.isArray(importedProducts)) {
-                        throw new Error('Formato de arquivo inválido');
-                    }
-                    
-                    if (confirm(`Importar ${importedProducts.length} produtos? Isso substituirá todos os produtos atuais.`)) {
-                        products = importedProducts.map(product => ({
-                            ...product,
-                            id: product.id || generateId(),
-                            updatedAt: new Date().toISOString()
-                        }));
-                        
-                        saveProductsToLocal();
-                        
-                        renderProducts();
-                        renderCategories();
-                        updateStats();
-                        updateProductSchema();
-                        
-                        showNotification(`${importedProducts.length} produtos importados com sucesso!`);
-                    }
-                    
-                } catch (error) {
-                    console.error('Error importing products:', error);
-                    showNotification('Erro ao importar produtos. Verifique o formato do arquivo.', 'error');
-                }
-            };
-            
-            reader.readAsText(file);
-            event.target.value = '';
-        }
-
-        function syncProducts() {
-            // Since we're using localStorage as primary storage, sync just means refresh
-            loadProductsFromLocal();
-            renderProducts();
-            renderCategories();
-            updateStats();
-            updateProductSchema();
-            showNotification('Sincronização concluída!');
-        }
-
-        // Utility functions
-        function generateId() {
-            return Date.now().toString(36) + Math.random().toString(36).substr(2);
-        }
-
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        function showNotification(message, type = 'success') {
-            // Remove existing notification
-            const existing = document.querySelector('.notification');
-            if (existing) {
-                existing.remove();
-            }
-            
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.setAttribute('role', 'alert');
-            notification.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}" aria-hidden="true"></i>
-                ${message}
-            `;
-            
-            document.body.appendChild(notification);
-            
-            // Show notification
-            setTimeout(() => notification.classList.add('show'), 100);
-            
-            // Hide notification
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
+        // Carregar produtos ao iniciar
+        loadProducts();
     </script>
 </body>
 </html>
+
