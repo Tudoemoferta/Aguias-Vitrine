@@ -464,6 +464,58 @@
             margin-bottom: 1rem;
         }
 
+        
+        /* Preço Anterior */
+        .product-previous-price {
+            font-size: 1.2rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Botões de Ação no Card */
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-edit,
+        .btn-delete {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-edit {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #45a049;
+        }
+
+        .btn-delete {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #da190b;
+        }
+
+        /* Modo de Edição */
+        .editing-mode {
+            background: #fff3cd !important;
+            border: 3px solid #ffc107 !important;
+        }
+
         @media (max-width: 768px) {
             .logo img {
                 width: 50px;
@@ -587,6 +639,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Preço Anterior (Opcional):</label>
+                    <input type="text" id="productPreviousPrice" placeholder="Ex: R$ 199,90 (deixe vazio se não houver)">
+                </div>
+
+                <div class="form-group">
                     <label>Plataforma:</label>
                     <select id="productPlatform">
                         <option value="Shopee">🛍️ Shopee</option>
@@ -641,8 +698,8 @@
 
     <script>
         // Configuracao do Supabase
-        const SUPABASE_URL = 'https://qjneiombtvifibolfvel.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqbmVpb21idHZpZmlib2xmdmVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA4ODYyMDMsImV4cCI6MjA3NjQ2MjIwM30.ov3_CzDuo1Cj0brmePBbPDIIh5R6JUV_RtBQ2UWy9G0';
+        const SUPABASE_URL = 'https://xyzcompany.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example';
         
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         
@@ -650,6 +707,7 @@
         let currentCategory = 'todas';
         const ADMIN_PASSWORD = 'aguias2025';
         let uploadedImageData = null;
+                document.getElementById('productPreviousPrice').value = '';
 
         // Carregar produtos
         async function loadProducts() {
@@ -737,6 +795,7 @@
                 image: image,
                 platform: platform,
                 category: category,
+                previous_price: document.getElementById('productPreviousPrice').value.trim() || null,
                 created_at: new Date().toISOString()
             };
 
@@ -852,6 +911,7 @@
 
         function closeAdminModal() {
             document.getElementById('adminModal').style.display = 'none';
+            resetForm();
         }
 
         function checkPassword() {
@@ -883,6 +943,155 @@
                 loadProducts();
             })
             .subscribe();
+
+        
+        // Variável global para controlar edição
+        let editingProductId = null;
+
+        // Editar produto
+        async function editProduct(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            openAdminModal();
+            
+            document.getElementById('adminForm').style.display = 'block';
+            document.getElementById('loginBtn').style.display = 'none';
+            document.getElementById('adminPassword').parentElement.style.display = 'none';
+
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productPreviousPrice').value = product.previous_price || '';
+            document.getElementById('productPlatform').value = product.platform || 'Shopee';
+            document.getElementById('productCategory').value = product.category || 'outros';
+            document.getElementById('productLink').value = product.link;
+            document.getElementById('productImage').value = product.image;
+            document.getElementById('productImage').style.display = 'block';
+
+            document.getElementById('imagePreview').src = product.image;
+            document.getElementById('imagePreview').style.display = 'block';
+
+            const submitBtn = document.querySelector('.btn-submit');
+            submitBtn.innerHTML = '<i class="fas fa-save"></i> Atualizar Produto';
+            submitBtn.onclick = function() { updateProduct(productId); };
+
+            editingProductId = productId;
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.classList.remove('editing-mode');
+            });
+            document.getElementById('product-' + productId)?.classList.add('editing-mode');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Atualizar produto
+        async function updateProduct(productId) {
+            const name = document.getElementById('productName').value.trim();
+            const price = document.getElementById('productPrice').value.trim();
+            const previousPrice = document.getElementById('productPreviousPrice').value.trim();
+            const link = document.getElementById('productLink').value.trim();
+            const platform = document.getElementById('productPlatform').value;
+            const category = document.getElementById('productCategory').value;
+            const imageUrl = document.getElementById('productImage').value.trim();
+            const image = uploadedImageData || imageUrl;
+
+            if (!name || !price || !link || !image) {
+                alert('⚠️ Preencha todos os campos obrigatórios!');
+                return;
+            }
+
+            const updatedProduct = {
+                name: name,
+                price: price,
+                previous_price: previousPrice || null,
+                link: link,
+                image: image,
+                platform: platform,
+                category: category
+            };
+
+            try {
+                const { error } = await supabase
+                    .from('products')
+                    .update(updatedProduct)
+                    .eq('id', productId);
+
+                if (error) {
+                    console.error('Erro ao atualizar:', error);
+                    const index = allProducts.findIndex(p => p.id === productId);
+                    if (index !== -1) {
+                        allProducts[index] = { ...allProducts[index], ...updatedProduct };
+                        saveToLocalStorage();
+                    }
+                    updateConnectionStatus(false);
+                } else {
+                    updateConnectionStatus(true);
+                }
+
+                await loadProducts();
+                resetForm();
+                closeAdminModal();
+                
+                alert('✅ Produto atualizado com sucesso!');
+            } catch (err) {
+                console.error('Erro:', err);
+                alert('❌ Erro ao atualizar produto!');
+            }
+        }
+
+        // Deletar produto
+        async function deleteProduct(productId) {
+            if (!confirm('🗑️ Tem certeza que deseja deletar este produto?')) {
+                return;
+            }
+
+            try {
+                const { error } = await supabase
+                    .from('products')
+                    .delete()
+                    .eq('id', productId);
+
+                if (error) {
+                    console.error('Erro ao deletar:', error);
+                    allProducts = allProducts.filter(p => p.id !== productId);
+                    saveToLocalStorage();
+                    updateConnectionStatus(false);
+                } else {
+                    updateConnectionStatus(true);
+                }
+
+                await loadProducts();
+                
+                alert('✅ Produto deletado com sucesso!');
+            } catch (err) {
+                console.error('Erro:', err);
+                allProducts = allProducts.filter(p => p.id !== productId);
+                saveToLocalStorage();
+                displayProducts();
+                alert('✅ Produto deletado localmente!');
+            }
+        }
+
+        // Resetar formulário
+        function resetForm() {
+            document.getElementById('productName').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productPreviousPrice').value = '';
+            document.getElementById('productLink').value = '';
+            document.getElementById('productImage').value = '';
+            document.getElementById('imagePreview').style.display = 'none';
+            uploadedImageData = null;
+            editingProductId = null;
+
+            const submitBtn = document.querySelector('.btn-submit');
+            submitBtn.innerHTML = '<i class="fas fa-plus"></i> Adicionar Produto';
+            submitBtn.onclick = addProduct;
+
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.classList.remove('editing-mode');
+            });
+        }
+
 
         loadProducts();
     </script>
