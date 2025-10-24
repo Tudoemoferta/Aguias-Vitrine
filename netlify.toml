@@ -7,6 +7,6 @@
   status = 200
 
 [[plugins]]
-  package = "netlify-plugin-cloudinary"
+  package = "netlify-plugin-cloudinary_aguias"
   [plugins.inputs]
-    cloudName = "your_cloudinary_cloud_name"
+    cloudName = "your_cloudinary_cloud_aguias"
