@@ -9,4 +9,4 @@
 [[plugins]]
   package = "netlify-plugin-cloudinary"
   [plugins.inputs]
-    cloudName = "your_cloudinary_cloud_name"
+    cloudName = "your_cloudinary_cloud_name_aguias"
