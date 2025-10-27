@@ -6,7 +6,3 @@
   to = "/index.html"
   status = 200
 
-[[plugins]]
-  package = "netlify-plugin-cloudinary_aguias"
-  [plugins.inputs]
-    cloudName = "your_cloudinary_cloud_aguias"

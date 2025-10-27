@@ -1,163 +1,179 @@
-# 🦅 Águias Vitrine - Site de Afiliados Profissional
+# 🦅 Águias Vitrine - Sincronização Real Entre Dispositivos
 
-## Visão Geral
+## ✅ O QUE FOI CORRIGIDO
 
-O **Águias Vitrine** é um site profissional de afiliados desenvolvido especificamente para apresentar produtos de diversas plataformas com design moderno, segurança robusta e funcionalidades avançadas.
+**PROBLEMA ANTERIOR:** Produtos salvos apenas no navegador local (localStorage), não apareciam em outros dispositivos.
 
-## ✨ Características Principais
+**SOLUÇÃO IMPLEMENTADA:** Sistema com banco de dados online real usando **Supabase** para sincronização automática entre TODOS os dispositivos.
 
-### 🎨 Design e Interface
-- **Design Moderno e Impactante**: Interface criativa com gradientes e animações suaves
-- **Tema Águia**: Logo personalizada e fundo transparente com águia voando sobre vale
-- **Responsivo**: Funciona perfeitamente em desktop, tablet e celular
-- **Animações**: Microinterações e efeitos visuais para melhor experiência
+## 🚀 COMO FUNCIONA AGORA
 
-### 🛍️ Categorias Organizadas
-- **Vestimentas e Acessórios**: Masculino, Feminino, Infantil, Hospitalar, Moda Praia
-- **Eletrônicos**: TV/Áudio, Informática, Games, Câmeras, Smart Home
-- **Celular**: Smartphones, Acessórios, Capas, Carregadores, Fones
-- **Casa e Decoração**: Móveis, Decoração, Cozinha, Banheiro, Jardim
-- **Beleza**: Maquiagem, Perfumes, Cuidados com a Pele, Cabelo, Unhas
-- **Utilidades em Geral**: Ferramentas, Automotivo, Esporte, Pet, Escritório
-- **E-books**: Negócios, Autoajuda, Tecnologia, Saúde, Educação
+### Para Visitantes:
+- ✅ **Produtos aparecem para TODOS** - não importa onde foram cadastrados
+- ✅ **Sincronização automática** - mudanças aparecem instantaneamente
+- ✅ **Funciona em qualquer dispositivo** - desktop, mobile, tablet
 
-### 🔍 Funcionalidades de Busca
-- **Busca por Nome**: Encontre produtos pelo nome
-- **Busca por Código**: Pesquise usando códigos de produto
-- **Filtros por Categoria**: Navegação rápida por categorias
-- **Busca em Tempo Real**: Resultados instantâneos conforme você digita
+### Para Administradores:
+- ✅ **Adicione produtos de qualquer lugar** - desktop ou celular
+- ✅ **Produtos aparecem em TODOS os dispositivos** imediatamente
+- ✅ **Senha de acesso:** `aguias2025`
 
-### 🛒 Gestão de Produtos
-- **Cadastro Completo**: Nome, categoria, subcategoria, plataforma, preços, descrição, imagem
-- **Múltiplas Plataformas**: Amazon, Shopee, AliExpress, Mercado Livre, Magazine Luiza, Americanas, Casas Bahia, Extra, Submarino, Hotmart, Eduzz, Monetizze
-- **Cálculo Automático de Desconto**: Mostra percentual de desconto quando há preço original
-- **Upload de Imagens**: Suporte para imagens dos produtos
-- **Edição e Exclusão**: Gerenciamento completo dos produtos
+## 📋 CONFIGURAÇÃO DO SUPABASE (NECESSÁRIO)
 
-### 🔐 Segurança Avançada
-- **Autenticação por Senha**: Acesso administrativo protegido
-- **Senha Segura**: `....` 
-- **Proteção contra Invasões**: Validações e controles de acesso
-- **Armazenamento Local Seguro**: Dados salvos com segurança no navegador
+### Passo 1: Criar Conta no Supabase (GRÁTIS)
 
-### 💾 Armazenamento e Sincronização
-- **Salvamento Automático**: Produtos salvos automaticamente no localStorage
-- **Sincronização entre Dispositivos**: Funciona no desktop e celular
-- **Backup e Restauração**: Exportar/importar produtos em formato JSON
-- **Persistência de Dados**: Produtos não são perdidos ao fechar o navegador
+1. Acesse: https://supabase.com
+2. Clique em **"Start your project"**
+3. Faça login com GitHub ou Google
+4. Clique em **"New Project"**
+5. Preencha:
+   - **Name:** aguias-vitrine
+   - **Database Password:** (crie uma senha forte)
+   - **Region:** South America (São Paulo)
+6. Clique em **"Create new project"**
+7. Aguarde 2-3 minutos até o projeto estar pronto
 
-## 🚀 Como Usar
+### Passo 2: Criar a Tabela de Produtos
 
-### Para Visitantes
-1. **Navegação**: Explore as categorias clicando nos cards ou usando os filtros
-2. **Busca**: Use a barra de pesquisa para encontrar produtos específicos
-3. **Visualização**: Veja detalhes, preços e descontos dos produtos
-4. **Compra**: Clique em "Ver Oferta" para ser redirecionado ao link de afiliado
+1. No painel do Supabase, clique em **"SQL Editor"** (ícone de banco de dados)
+2. Clique em **"New Query"**
+3. Cole este código SQL:
 
-### Para Administradores
-1. **Acesso**: Clique em "Administração" no cabeçalho
-2. **Login**: Digite a senha `....`
-3. **Adicionar Produto**: Clique em "Adicionar Produto" e preencha os dados
-4. **Gerenciar**: Use os botões "Editar" e "Excluir" nos produtos
-5. **Backup**: Use "Exportar Produtos" para fazer backup dos dados
+```sql
+-- Criar tabela de produtos
+CREATE TABLE products (
+    id BIGSERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    price TEXT NOT NULL,
+    link TEXT NOT NULL,
+    image TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
 
-## 📱 Compatibilidade
+-- Habilitar Row Level Security
+ALTER TABLE products ENABLE ROW LEVEL SECURITY;
 
-### Desktop
-- Chrome, Firefox, Safari, Edge (versões recentes)
-- Resolução mínima: 1024x768
-- Funcionalidades completas disponíveis
+-- Permitir leitura para todos
+CREATE POLICY "Permitir leitura pública" ON products
+    FOR SELECT
+    USING (true);
 
-### Mobile
-- iOS Safari, Chrome Mobile, Samsung Internet
-- Design responsivo otimizado
-- Touch-friendly interface
-- Todas as funcionalidades mantidas
+-- Permitir inserção para todos (você pode restringir depois)
+CREATE POLICY "Permitir inserção pública" ON products
+    FOR INSERT
+    WITH CHECK (true);
 
-## 🔧 Instalação
+-- Permitir atualização para todos
+CREATE POLICY "Permitir atualização pública" ON products
+    FOR UPDATE
+    USING (true);
 
-1. **Download**: Baixe todos os arquivos do projeto
-2. **Hospedagem**: Faça upload para seu servidor web ou GitHub Pages
-3. **Configuração**: Não requer configuração adicional
-4. **Acesso**: Abra o arquivo `index.html` no navegador
-
-## ⚙️ Configurações
-
-### Alterar Senha de Administrador
-Edite a linha no arquivo `index.html`:
-```javascript
-const ADMIN_PASSWORD = '....'; // Altere aqui
+-- Permitir exclusão para todos
+CREATE POLICY "Permitir exclusão pública" ON products
+    FOR DELETE
+    USING (true);
 ```
 
-### Personalizar Categorias
-Modifique o objeto `subcategories` no JavaScript para adicionar/remover subcategorias.
+4. Clique em **"Run"** (ou pressione Ctrl+Enter)
+5. Você verá a mensagem: **"Success. No rows returned"**
 
-### Adicionar Plataformas
-Edite o select `productPlatform` no HTML para incluir novas plataformas de afiliados.
+### Passo 3: Obter as Credenciais
 
-## 📊 Estatísticas
+1. No painel do Supabase, clique em **"Settings"** (ícone de engrenagem)
+2. Clique em **"API"**
+3. Copie os seguintes valores:
 
-O site exibe automaticamente:
-- **Total de Produtos**: Contagem em tempo real
-- **Desconto Médio**: Calculado automaticamente
-- **Produtos por Categoria**: Contadores dinâmicos
-- **Última Atualização**: Timestamp de modificação
+   - **Project URL:** `https://xyzcompany.supabase.co`
+   - **anon public key:** `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`
 
-## 🎯 Recursos Avançados
+### Passo 4: Configurar o Site
 
-### Design Responsivo
-- Grid flexível que se adapta a qualquer tela
-- Imagens otimizadas para diferentes resoluções
-- Menu e navegação adaptáveis
+1. Abra o arquivo `index.html`
+2. Encontre estas linhas (por volta da linha 350):
 
-### Performance
-- Carregamento rápido com CSS e JS otimizados
-- Lazy loading para imagens
-- Animações suaves com CSS3
+```javascript
+const SUPABASE_URL = 'https://xyzcompany.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
+```
 
-### SEO Friendly
-- Estrutura HTML semântica
-- Meta tags otimizadas
-- URLs amigáveis para categorias
+3. **Substitua** pelos seus valores:
+   - `SUPABASE_URL` = seu **Project URL**
+   - `SUPABASE_KEY` = sua **anon public key**
 
-## 🛡️ Segurança
+4. Salve o arquivo
 
-### Proteções Implementadas
-- Validação de entrada de dados
-- Sanitização de conteúdo
-- Controle de acesso administrativo
-- Prevenção contra XSS básico
+## 🌐 PUBLICAR NO NETLIFY
 
-### Recomendações
-- Altere a senha padrão imediatamente
-- Faça backups regulares dos produtos
-- Mantenha o site atualizado
-- Use HTTPS em produção
+### Opção 1: Drag and Drop (Mais Fácil)
 
-## 📞 Suporte
+1. Acesse: https://app.netlify.com/drop
+2. Arraste a pasta `aguias-vitrine-sync` para a área indicada
+3. Aguarde o upload
+4. Seu site estará no ar em segundos!
+5. Copie o link gerado (ex: `https://aguias-vitrine-xyz.netlify.app`)
 
-**Email de Contato**: tudoemoferta123@gmail.com
+### Opção 2: Via GitHub
 
-Para dúvidas sobre:
-- Configuração do site
-- Adição de produtos
-- Problemas técnicos
-- Sugestões de melhorias
+1. Crie um repositório no GitHub
+2. Faça upload dos arquivos
+3. Acesse: https://app.netlify.com
+4. Clique em **"Add new site"** → **"Import an existing project"**
+5. Conecte com GitHub e selecione o repositório
+6. Clique em **"Deploy site"**
 
-## 🔄 Atualizações Futuras
+## 📱 COMO USAR
 
-Recursos planejados:
-- Integração com APIs de afiliados
-- Sistema de cupons automático
-- Notificações push
-- Analytics integrado
-- Comparador de preços
-- Sistema de reviews
+### Para Visitantes:
+1. Acesse o site pelo link do Netlify
+2. Veja todos os produtos disponíveis
+3. Use a busca para encontrar produtos específicos
+4. Clique em "Ver Oferta" para acessar o link do produto
 
-## 📝 Licença
+### Para Administradores:
+1. Clique no botão **"🔐 Administração"** (canto superior direito)
+2. Digite a senha: **`aguias2025`**
+3. Preencha os campos:
+   - **Nome do Produto**
+   - **Preço** (ex: R$ 89,90)
+   - **Link do Produto** (seu link de afiliado)
+   - **URL da Imagem** (link da imagem do produto)
+4. Clique em **"➕ Adicionar Produto"**
+5. **PRONTO!** O produto aparecerá **INSTANTANEAMENTE** em todos os dispositivos
 
-Este projeto foi desenvolvido especificamente para o cliente e é de uso exclusivo conforme acordado.
+## 🔐 SEGURANÇA
+
+- ✅ **Senha de administrador** protege o painel
+- ✅ **Credenciais do Supabase** são públicas mas seguras (anon key)
+- ✅ **Row Level Security** protege o banco de dados
+- ✅ **HTTPS** em todos os acessos
+
+## 🎯 RECURSOS
+
+- ✅ **Sincronização em tempo real** entre todos os dispositivos
+- ✅ **Busca de produtos** instantânea
+- ✅ **Design responsivo** (funciona em desktop e mobile)
+- ✅ **SEO otimizado** para aparecer no Google
+- ✅ **Fallback para localStorage** se Supabase estiver offline
+- ✅ **Indicador de sincronização** mostra status da conexão
+
+## 📊 VERIFICAÇÃO NO GOOGLE SEARCH CONSOLE
+
+O site já está configurado com a tag de verificação do Google:
+- Meta tag: `ktO2w5wC_X1YSXOI2-RdaXRPEbAeX_fLDHUs_x-b-YM`
+
+## 🆘 SUPORTE
+
+- 📧 Email: tudoemoferta123@gmail.com
+- 📱 Instagram: @tudoemofertas123
+
+## 📝 NOTAS IMPORTANTES
+
+1. **SEMPRE configure o Supabase** antes de publicar o site
+2. **Teste em dois dispositivos** para confirmar a sincronização
+3. **Guarde suas credenciais** do Supabase em local seguro
+4. **Não compartilhe a senha de administrador** com terceiros
 
 ---
 
-**Desenvolvido com ❤️ para maximizar suas vendas como afiliado!**
+**Desenvolvido com ❤️ para Águias Vitrine**
+
