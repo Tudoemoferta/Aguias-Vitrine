@@ -1097,4 +1097,120 @@
     </script>
 </body>
 </html>
+<!-- =============================== -->
+<!-- 🔒 Criptografia SHA-256 Local -->
+<!-- =============================== -->
+
+<!-- CDN fallback para hash se WebCrypto não existir -->
+<script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js" defer></script>
+
+<script>
+/* ==============================================================
+   HASH SEGURO LOCAL (SHA-256 com SALT)
+   ==============================================================
+   - Armazena apenas salt e hash no localStorage
+   - Nunca guarda senha em texto puro
+   - Compatível com browsers modernos e antigos (fallback)
+   - Use HTTPS em produção
+================================================================= */
+
+// 🔧 util: converte ArrayBuffer -> hexadecimal
+function buf2hex(buffer) {
+  const bytes = new Uint8Array(buffer);
+  return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// 🔧 gera salt aleatório
+function generateSalt(length = 16) {
+  const arr = new Uint8Array(length);
+  if (window.crypto?.getRandomValues) {
+    window.crypto.getRandomValues(arr);
+  } else {
+    for (let i = 0; i < length; i++) arr[i] = Math.floor(Math.random() * 256);
+  }
+  return btoa(String.fromCharCode(...arr)); // base64 curta
+}
+
+// 🔐 hash usando Web Crypto API
+async function hashWithSubtle(saltBase64, password) {
+  const saltBytes = Uint8Array.from(atob(saltBase64), c => c.charCodeAt(0));
+  const passBytes = new TextEncoder().encode(password);
+  const combined = new Uint8Array(saltBytes.length + passBytes.length);
+  combined.set(saltBytes);
+  combined.set(passBytes, saltBytes.length);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', combined);
+  return buf2hex(hashBuffer);
+}
+
+// 🔐 fallback (js-sha256)
+function hashFallback(saltBase64, password) {
+  const saltStr = atob(saltBase64);
+  return sha256(saltStr + password);
+}
+
+// 🔐 decide qual método usar
+async function computeHash(saltBase64, password) {
+  if (window.crypto?.subtle?.digest) {
+    try {
+      return await hashWithSubtle(saltBase64, password);
+    } catch (err) {
+      console.warn("Erro WebCrypto, usando fallback:", err);
+      return hashFallback(saltBase64, password);
+    }
+  } else {
+    return hashFallback(saltBase64, password);
+  }
+}
+
+// 💾 salvar senha (gera salt e hash)
+async function savePasswordClient(password) {
+  if (!password) throw new Error("Senha vazia");
+  const salt = generateSalt();
+  const hash = await computeHash(salt, password);
+  localStorage.setItem("aguias_pwd_salt", salt);
+  localStorage.setItem("aguias_pwd_hash", hash);
+  alert("Senha armazenada de forma segura (hash + salt).");
+  return { salt, hash };
+}
+
+// 🔎 verificar senha
+async function verifyPasswordClient(password) {
+  const salt = localStorage.getItem("aguias_pwd_salt");
+  const storedHash = localStorage.getItem("aguias_pwd_hash");
+  if (!salt || !storedHash) {
+    alert("Nenhuma senha cadastrada ainda.");
+    return false;
+  }
+  const hash = await computeHash(salt, password);
+  const ok = hash === storedHash;
+  alert(ok ? "Senha correta ✅" : "Senha incorreta ❌");
+  return ok;
+}
+
+/* ==============================================================
+   🧩 Exemplo de uso (botões opcionais de teste)
+   Pode remover depois que validar.
+============================================================== */
+(function setupDemoUI() {
+  const box = document.createElement('div');
+  box.style.position = 'fixed';
+  box.style.bottom = '10px';
+  box.style.right = '10px';
+  box.style.zIndex = '99999';
+  box.style.background = 'rgba(255,255,255,0.95)';
+  box.style.border = '1px solid #ccc';
+  box.style.padding = '10px';
+  box.style.borderRadius = '8px';
+  box.style.fontSize = '13px';
+  box.innerHTML = `
+    <input type="password" id="pwdInput" placeholder="Senha" style="padding:5px;border:1px solid #ccc;border-radius:4px;">
+    <button onclick="savePasswordClient(document.getElementById('pwdInput').value)">Salvar</button>
+    <button onclick="verifyPasswordClient(document.getElementById('pwdInput').value)">Verificar</button>
+  `;
+  document.body.appendChild(box);
+})();
+</script>
+<!-- =============================== -->
+<!-- 🔒 Fim do bloco de segurança -->
+<!-- =============================== -->
 
