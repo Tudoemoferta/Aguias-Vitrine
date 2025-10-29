@@ -1,0 +1,28 @@
+// scripts/generate-config.js
+// Gera js/config.js para o cliente com as variáveis necessárias.
+// Atenção: este arquivo expõe as variáveis no cliente — só coloque aqui
+// chaves que possam ser públicas (ex: Supabase anon key). Não expor secrets
+// que devam permanecer no servidor (service_role keys).
+
+const fs = require('fs');
+const path = require('path');
+
+const config = {
+  SUPABASE_URL: process.env.SUPABASE_URL || '',
+  SUPABASE_KEY: process.env.SUPABASE_KEY || '',
+  CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || '',
+  // caso queira enviar um flag para demo/offline:
+  DEBUG: process.env.DEBUG || '',
+};
+
+const outDir = path.join(__dirname, '..', 'js');
+if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+
+const outFile = path.join(outDir, 'config.js');
+
+const fileContent = `// THIS FILE IS GENERATED DURING NETLIFY BUILD
+window.__CONFIG__ = ${JSON.stringify(config, null, 2)};
+`;
+
+fs.writeFileSync(outFile, fileContent, 'utf8');
+console.log('Generated js/config.js with keys:', Object.keys(config));
