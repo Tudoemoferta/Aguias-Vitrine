@@ -1,23 +1,21 @@
-# ===============================
-# Configuração principal do Netlify
-# ===============================
-
 [build]
   publish = "."
   command = "npm run build"
 
-# Redirecionamento SPA
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# ===============================
-# Plugin: Cloudinary (para imagens)
-# ===============================
 [[plugins]]
   package = "netlify-plugin-cloudinary"
   [plugins.inputs]
     cloudName = "aguiasvitrine"
 
-# Variáveis de ambiente são gerenciadas pelo painel Netlify
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[build.environment]
+  SUPABASE_URL = "https://qjneiombtvifibolfvel.supabase.co"
+  SUPABASE_KEY = "sb_publishable_dMX4SFx5Xaf9EjZXaTH_ug_mohAqyP5"
