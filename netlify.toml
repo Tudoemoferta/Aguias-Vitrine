@@ -1,22 +1,19 @@
-# ===============================
-# Configuração principal do Netlify
-# ===============================
-
 [build]
   publish = "."
+  command = "npm run build"
 
-# Redirecionamento SPA
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# ===============================
-# Plugin: Cloudinary (para imagens)
-# ===============================
+
 [[plugins]]
-  package = "netlify-plugin-cloudinary_aguiasvitrine"
+  package = "netlify-plugin-cloudinary"
 
   [plugins.inputs]
-    # Substitua pelo nome real do seu Cloudinary (encontrado no painel)
+    # Substitua pelos valores reais do seu Cloudinary
     cloudName = "aguiasvitrine"
+    apiKey = "SUA_API_KEY_AQUI"
+    apiSecret = "SEU_API_SECRET_AQUI"
