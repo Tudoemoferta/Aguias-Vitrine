@@ -698,8 +698,10 @@
 
     <script>
         // Configuracao do Supabase
-        const SUPABASE_URL = 'https://xyzcompany.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example';
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Config gerada durante o build (js/config.js) -->
+<script src="js/config.js"></script>
         
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         
