@@ -1,31 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Meta Tags Otimizadas -->
-    <title>🦅 Águias Vitrine - Ofertas e Produtos em Promoção | Tudo em Oferta com os Melhores Descontos</title>
-    <meta name="description" content="Encontre os melhores produtos em oferta na Águias Vitrine! Eletrônicos, moda, casa, beleza e muito mais com descontos imperdíveis.">
-    <meta name="keywords" content="águias vitrine, ofertas, promoções, descontos, shopee, amazon, mercado livre">
-    <meta name="author" content="Águias Vitrine - Tudo em Oferta">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Google Search Console Verification -->
-    <meta name="google-site-verification" content="ktO2w5wC_X1YSXOI2-RdaXRPEbAeX_fLDHUs_x-b-YM" />
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="eagle-logo.jpg">
-    
-   <!-- Supabase Client -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- Config gerada durante o build (js/config.js) -->
-<script src="js/config.js"></script>
+  <!-- SEO Meta Tags Otimizadas -->
+  <title>🦅 Águias Vitrine - Ofertas e Produtos em Promoção | Tudo em Oferta com os Melhores Descontos</title>
+  <meta name="description" content="Encontre os melhores produtos em oferta nas Águias Vitrine! Eletrônicos, moda, calçados e mais com os melhores preços!" />
+  <meta name="keywords" content="águia vitrine, ofertas, promoções, descontos, shopee, amazon, mercado livre, tudo em oferta" />
+  <meta name="author" content="Águias Vitrine - Tudo em Oferta" />
+  <meta name="robots" content="index, follow" />
 
-    
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Verificação do Google Search Console -->
+  <meta name="google-site-verification" content="kt02wSwC_XIYSXOI2-RdaXRPEbAeX_fLDHUS_x-b-YM" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="logotipo-da-águia.jpg" />
+
+  <!-- Cliente Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Configuração gerada durante o build (js/config.js) -->
+  <script src="js/config.js"></script>
+
+  <!-- Fonte Incrível -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Conteúdo do site -->
+  <h1>Bem-vindo à Águias Vitrine 🦅</h1>
+  <div id="produtos"></div>
+
+  <!-- Inicialização segura do Supabase -->
+  <script>
+    const cfg = window.__CONFIG__ || {};
+    const SUPABASE_URL = cfg.SUPABASE_URL || '';
+    const SUPABASE_KEY = cfg.SUPABASE_KEY || '';
+
+    if (!SUPABASE_URL || !SUPABASE_KEY) {
+      console.warn('Supabase não configurado — verifique variáveis de ambiente no Netlify.');
+    }
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Exemplo: leitura dos produtos
+    async function carregarProdutos() {
+      const { data, error } = await supabase.from('produtos').select('*');
+      if (error) {
+        console.error('Erro ao carregar produtos:', error);
+      } else {
+        const container = document.getElementById('produtos');
+        container.innerHTML = data.map(p => `
+          <div class="produto">
+            <h3>${p.nome}</h3>
+            <p>${p.descricao}</p>
+            <strong>R$ ${p.preco}</strong>
+          </div>
+        `).join('');
+      }
+    }
+
+    carregarProdutos();
     
     <style>
         * {
