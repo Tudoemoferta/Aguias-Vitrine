@@ -21,8 +21,10 @@ if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 const outFile = path.join(outDir, 'config.js');
 
 const fileContent = `// THIS FILE IS GENERATED DURING NETLIFY BUILD
-window.__CONFIG__ = ${JSON.stringify(config, null, 2)};
-`;
+window.__CONFIG__ = {
+  SUPABASE_URL: "https://qjneiombtvifibolfvel.supabase.co",
+  SUPABASE_KEY: "sb_publishable_dMX4SFx5Xaf9EjZXaTH_ug_mohAqyP5"
+};
 
 fs.writeFileSync(outFile, fileContent, 'utf8');
 console.log('Generated js/config.js with keys:', Object.keys(config));
