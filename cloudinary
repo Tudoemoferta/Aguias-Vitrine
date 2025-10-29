@@ -1,0 +1,4 @@
+npm install --save-dev netlify-plugin-cloudinary
+git add package.json package-lock.json
+git commit -m "corrige plugin cloudinary"
+git push
