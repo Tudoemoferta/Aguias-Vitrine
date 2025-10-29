@@ -1,33 +1,23 @@
+# ===============================
+# Configuração principal do Netlify
+# ===============================
+
 [build]
   publish = "."
-  # Executa um script Node que gera js/config.js a partir das variáveis de ambiente do Netlify
-  command = "node scripts/generate-config.js"
+  command = "npm run build"
 
-# Redirecionamento para SPA
+# Redirecionamento SPA
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Plugin Cloudinary — use o plugin oficial
+# ===============================
+# Plugin: Cloudinary (para imagens)
+# ===============================
 [[plugins]]
   package = "netlify-plugin-cloudinary"
-
   [plugins.inputs]
     cloudName = "aguiasvitrine"
-    # outras entradas opcionais:
-    # folder = "imagens"
-    # deliveryType = "upload"
 
-[functions]
-  directory = "netlify/functions"
-  node_bundler = "esbuild"
-
-# Expõe variáveis de ambiente ao processo de build (não automaticamente ao cliente)
-[build.environment]
-  # Substitua pelos valores reais no painel Netlify (ou mantenha aqui para testes)
-  SUPABASE_URL = "${SUPABASE_URL}"
-  SUPABASE_KEY = "${SUPABASE_KEY}"
-  # Não exponha service_role em cliente — apenas anon key se necessário.
-  CLOUDINARY_CLOUD_NAME = "${CLOUDINARY_CLOUD_NAME}"
-  # Use o painel Netlify para CLOUDINARY_API_KEY e CLOUDINARY_API_SECRET (não colocamos no toml)
+# Variáveis de ambiente são gerenciadas pelo painel Netlify
