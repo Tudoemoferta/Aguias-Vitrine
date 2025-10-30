@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Águias Vitrine - Tudo em Oferta</title>
+  
+  <link rel="icon" type="image/jpeg" href="eagle-logo.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+</head>
+
+<body>
+  <header class="header">
+    <h1>🦅 Águias Vitrine</h1>
+  </header>
+
+  <main class="container">
+    <form id="addProductForm">
+      <input type="text" id="productName" placeholder="Nome do produto" required>
+      <input type="url" id="productUrl" placeholder="URL do produto" required>
+      <input type="text" id="platform" placeholder="Plataforma (Shopee, Amazon...)" required>
+      <input type="number" id="oldPrice" placeholder="Preço anterior" required>
+      <input type="number" id="newPrice" placeholder="Preço atual" required>
+      <input type="number" id="discount" placeholder="Desconto %" required>
+      <textarea id="description" placeholder="Descrição do produto"></textarea>
+      <button type="submit">Adicionar Produto</button>
+    </form>
+
+    <section id="productList" class="product-list"></section>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
