@@ -1,0 +1,14 @@
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
+);
+
+export default async (req, res) => {
+  const { name, url, platform, old_price, new_price, discount, description } = JSON.parse(req.body);
+  const { error } = await supabase.from("produtos").insert([{ name, url, platform, old_price, new_price, discount, description }]);
+  
+  if (error) return res.status(400).json({ error: error.message });
+  return res.status(200).json({ success: true });
+};
