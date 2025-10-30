@@ -1,0 +1,81 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.4);
+}
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 20px auto;
+  background: rgba(255,255,255,0.15);
+  padding: 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+input, textarea, button {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+}
+
+button {
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Produtos */
+.product-item {
+  background: rgba(255,255,255,0.2);
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+.prices {
+  display: flex;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.old { text-decoration: line-through; color: #bbb; }
+.new { color: #fff; }
+.discount { color: #ff0; }
+
+/* 🎉 Efeito Confete */
+.confete {
+  position: fixed;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #fff, #f0c93d, #ff69b4, #00ffff, #8a2be2);
+  border-radius: 50%;
+  animation: cairConfete linear forwards;
+  opacity: 0.9;
+  z-index: 9999;
+}
+
+@keyframes cairConfete {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
