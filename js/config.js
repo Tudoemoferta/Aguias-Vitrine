@@ -1,32 +1,71 @@
-// scripts/generate-config.js
-// Gera js/config.js para o cliente com as variáveis necessárias.
-// Atenção: este arquivo expõe as variáveis no cliente — só coloque aqui
-// chaves que possam ser públicas (ex: Supabase anon key). Não expor secrets
-// que devam permanecer no servidor (service_role keys).
+const cfg = window.__CONFIG__;
+const supabase = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_KEY);
 
-const fs = require('fs');
-const path = require('path');
+async function loadProducts() {
+  const { data, error } = await supabase.from('produtos').select('*').order('id', { ascending: false });
+  if (error) return console.error('Erro ao carregar produtos:', error);
+  renderProducts(data);
+}
 
-const config = {
-  SUPABASE_URL: process.env.SUPABASE_URL || '',
-  SUPABASE_KEY: process.env.SUPABASE_KEY || '',
-  CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || '',
-  // caso queira enviar um flag para demo/offline:
-  DEBUG: process.env.DEBUG || '',
-};
+function renderProducts(products) {
+  const list = document.getElementById('productList');
+  list.innerHTML = '';
 
-const outDir = path.join(__dirname, '..', 'js');
-if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+  products.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'product-item';
+    item.innerHTML = `
+      <h3>${p.name}</h3>
+      <p>${p.description || ''}</p>
+      <div class="prices">
+        <span class="old">R$${p.old_price}</span>
+        <span class="new">R$${p.new_price}</span>
+        <span class="discount">-${p.discount}%</span>
+      </div>
+      <button class="visit" onclick="visitProduct('${p.url}')">Ver oferta</button>
+      <button class="delete" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
+    `;
+    list.appendChild(item);
+  });
+}
 
-const outFile = path.join(outDir, 'config.js');
+function chuvaDeConfetes() {
+  for (let i = 0; i < 100; i++) {
+    const confete = document.createElement('div');
+    confete.className = 'confete';
+    confete.style.left = Math.random() * 100 + 'vw';
+    confete.style.animationDuration = 2 + Math.random() * 3 + 's';
+    document.body.appendChild(confete);
+    setTimeout(() => confete.remove(), 5000);
+  }
+}
 
-const fileContent = `// THIS FILE IS GENERATED DURING NETLIFY BUILD
-// Configurações públicas do Supabase
-window.__CONFIG__ = {
-  SUPABASE_URL: "https://qjneiombtvifibolfvel.supabase.co",
-  SUPABASE_KEY: "sb_publishable_dMX4SFx5Xaf9EjZXaTH_ug_mohAqyP5"
-};
+function visitProduct(url) {
+  chuvaDeConfetes();
+  setTimeout(() => window.open(url, '_blank'), 1200);
+}
 
+async function deleteProduct(id) {
+  await supabase.from('produtos').delete().eq('id', id);
+  loadProducts();
+}
 
-fs.writeFileSync(outFile, fileContent, 'utf8');
-console.log('Generated js/config.js with keys:', Object.keys(config));
+document.getElementById('addProductForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = document.getElementById('productName').value;
+  const url = document.getElementById('productUrl').value;
+  const platform = document.getElementById('platform').value;
+  const old_price = document.getElementById('oldPrice').value;
+  const new_price = document.getElementById('newPrice').value;
+  const discount = document.getElementById('discount').value;
+  const description = document.getElementById('description').value;
+
+  const { error } = await supabase.from('produtos').insert([{ name, url, platform, old_price, new_price, discount, description }]);
+  if (error) alert('Erro ao adicionar produto!');
+  else {
+    e.target.reset();
+    loadProducts();
+  }
+});
+
+loadProducts();
