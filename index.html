@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Águias Vitrine</title>
-
-  <link rel="icon" type="image/jpeg" href="images/eagle-logo.jpg" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/config.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Águias Vitrine 🦅</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script defer src="https://unpkg.com/@supabase/supabase-js"></script>
+  <script defer src="script.js"></script>
 </head>
 <body>
   <header>
-    <h1>🦅 Águias Vitrine</h1>
-    <p>Ofertas incríveis — atualize, edite e compartilhe em tempo real!</p>
+    <h1>Bem-vindo à <span>Águias Vitrine</span> 🦅</h1>
   </header>
 
   <main>
-    <section id="form-section">
-      <h2>Adicionar Produto</h2>
-      <form id="product-form">
-        <input type="text" id="productName" placeholder="Nome do produto" required />
-        <input type="url" id="productImage" placeholder="URL da imagem" required />
-        <input type="url" id="affiliateLink" placeholder="Link de afiliado" required />
-        <input type="text" id="platform" placeholder="Plataforma (Shopee, Amazon...)" required />
-        <input type="number" id="oldPrice" placeholder="Preço anterior" step="0.01" />
-        <input type="number" id="newPrice" placeholder="Preço atual" step="0.01" required />
-        <input type="number" id="discount" placeholder="Desconto (%)" />
-        <textarea id="description" placeholder="Descrição do produto"></textarea>
-        <button type="submit" class="btn-add">Adicionar</button>
-      </form>
+    <section id="admin-section">
+      <input type="password" id="adminPassword" placeholder="Senha de Administrador">
+      <button id="loginButton">Entrar</button>
+      <div id="adminPanel" class="hidden">
+        <h2>Adicionar Produto</h2>
+        <input type="text" id="productName" placeholder="Nome do Produto">
+        <input type="text" id="productImage" placeholder="URL da Imagem">
+        <input type="text" id="productLink" placeholder="Link de Afiliado">
+        <input type="text" id="productPrice" placeholder="Preço Atual">
+        <input type="text" id="productPreviousPrice" placeholder="Preço Anterior">
+        <select id="productPlatform">
+          <option value="">Escolha a Plataforma</option>
+          <option value="Shopee">Shopee</option>
+          <option value="Mercado Livre">Mercado Livre</option>
+          <option value="Amazon">Amazon</option>
+          <option value="Hotmart">Hotmart</option>
+          <option value="Outros">Outros</option>
+        </select>
+        <textarea id="productDescription" placeholder="Descrição do produto"></textarea>
+        <button id="addProduct">Adicionar Produto</button>
+      </div>
     </section>
 
-    <section id="products-section">
-      <h2>Produtos Cadastrados</h2>
-      <div id="product-list" class="grid"></div>
+    <section id="products">
+      <h2>Produtos em Destaque</h2>
+      <div id="productList" class="product-grid"></div>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Águias Vitrine — Todos os direitos reservados.</p>
+    <p>🦅 Águias Vitrine — Inteligência, Elegância e Liberdade 💎</p>
   </footer>
-
-  <script src="js/app.js"></script>
 </body>
 </html>
