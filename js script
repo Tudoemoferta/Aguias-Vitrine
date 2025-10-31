@@ -1,0 +1,73 @@
+const SUPABASE_URL = "https://YOUR_SUPABASE_URL.supabase.co";
+const SUPABASE_KEY = "YOUR_SUPABASE_ANON_KEY";
+const ADMIN_PASSWORD = "aguia2025";
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const loginButton = document.getElementById("loginButton");
+const adminPanel = document.getElementById("adminPanel");
+const addProductButton = document.getElementById("addProduct");
+const productList = document.getElementById("productList");
+
+loginButton.addEventListener("click", () => {
+  const pass = document.getElementById("adminPassword").value;
+  if (pass === ADMIN_PASSWORD) {
+    adminPanel.classList.remove("hidden");
+    alert("✅ Acesso permitido!");
+  } else {
+    alert("❌ Senha incorreta!");
+  }
+});
+
+addProductButton.addEventListener("click", async () => {
+  const name = document.getElementById("productName").value.trim();
+  const image = document.getElementById("productImage").value.trim();
+  const link = document.getElementById("productLink").value.trim();
+  const price = document.getElementById("productPrice").value.trim();
+  const oldPrice = document.getElementById("productPreviousPrice").value.trim();
+  const platform = document.getElementById("productPlatform").value.trim();
+  const description = document.getElementById("productDescription").value.trim();
+
+  if (!name || !image || !link || !price) return alert("⚠️ Preencha todos os campos!");
+
+  const { data, error } = await supabase.from("products").insert([{ name, image, link, price, oldPrice, platform, description }]);
+  if (error) {
+    console.error(error);
+    return alert("Erro ao salvar!");
+  }
+
+  alert("✅ Produto adicionado!");
+  confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+  loadProducts();
+});
+
+async function loadProducts() {
+  const { data, error } = await supabase.from("products").select("*").order("id", { ascending: false });
+  if (error) return console.error(error);
+  displayProducts(data);
+}
+
+function displayProducts(products) {
+  productList.innerHTML = "";
+  products.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.innerHTML = `
+      <img src="${p.image}" alt="${p.name}">
+      <h3>${p.name}</h3>
+      <p>${p.description || ""}</p>
+      <p><del>${p.oldPrice || ""}</del> <strong>${p.price}</strong></p>
+      <p>🛍️ ${p.platform || "Desconhecida"}</p>
+      <button onclick="window.open('${p.link}', '_blank'); confetti({ particleCount: 300, spread: 100 });">Comprar</button>
+      <button onclick="deleteProduct(${p.id})">🗑️ Deletar</button>
+    `;
+    productList.appendChild(card);
+  });
+}
+
+async function deleteProduct(id) {
+  if (!confirm("Tem certeza que deseja excluir?")) return;
+  await supabase.from("products").delete().eq("id", id);
+  loadProducts();
+}
+
+loadProducts();
